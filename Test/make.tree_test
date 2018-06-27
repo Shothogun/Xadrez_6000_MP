@@ -43,13 +43,8 @@ LCOV = lcov_html
 
 all: $(EXEC)
 
-<<<<<<< HEAD
 coverage: CFLAGS += -fprofile-arcs -ftest-coverage
 coverage: LIBS += -fprofile-arcs -ftest-coverage
-=======
-covarage: CFLAGS += -fprofile-arcs -ftest-coverage
-covarage: LIBS += -fprofile-arcs -ftest-coverage
->>>>>>> 3f58332de1b9f5141d2139d161c8dc9e93b1c9e3
 coverage: reset $(EXEC)
 	./$(EXEC)
 	gcov $(DIR_OBJ)
