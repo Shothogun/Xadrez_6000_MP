@@ -19,7 +19,46 @@ namespace chess {
 */
 template <class Item>
 class Tree {
+public:
+  Tree();
+  int size();
+  void insertRoot(Item item);
+protected:
+  /** Classe que guarda os itens contidos na árvore e serve de conector entre
+  os nós da árvore.
+  */
+  class Node {
+    friend class Tree;
+  public:
+    Node(Item item);
+  private:
+    Item item_;
+    std::vector<Node> sons_;
+  }; // class Node
+private:
+  Node* root_;  /// Raiz da árvore.
+  int size_;   /// Número de itens da árvore.
+  Node* iterator_;  /// Iterador que se move pela árvore.
 };
+
+////////////////////////////////////////////////////////////////////////////////
+
+template <class Item>
+Tree<Item>::Tree() :
+  root_(nullptr), size_(0), iterator_(nullptr) {}
+
+template <class Item>
+int Tree<Item>::size() {
+  return size_;
+}  // size()
+
+template <class Item>
+void Tree<Item>::insertRoot(Item item) {
+  Tree<Item>::Node* node;
+  if (root_ != nullptr) {
+    root_->~Node();
+  }
+}
 
 } // namespace chess
 #endif // TREE_HPP_
