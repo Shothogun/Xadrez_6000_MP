@@ -3,9 +3,17 @@
 #include "catch.hpp"
 #include "tree.hpp"
 
-TEST_CASE("Programação orientada a teste") {
+TEST_CASE("Construtor") {
   chess::Tree<int> tree;
-  SECTION("Árvore vazia") {
+  SECTION("Função size") {
     CHECK(tree.size() == 0);
-  } // SECTION
-} // TEST_CASE
+  }
+}
+
+TEST_CASE("Inserir raiz") {
+  chess::Tree<int> tree;
+  tree.insertRoot(0);
+  SECTION("Função size") {
+    CHECK(tree.size() == 1);
+  }
+}
