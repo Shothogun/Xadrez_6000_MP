@@ -23,3 +23,16 @@ TEST_CASE ("Inserir raiz") {
     CHECK (tree.item() == 1);
   }
 }
+
+TEST_CASE ("Inserir filho na raiz") {
+  chess::Tree<int> tree;
+  tree.insertSon(0);
+  SECTION("Deve haver apenas um item '0' na raiz") {
+    CHECK (tree.size() == 1);
+    CHECK (tree.item() == 0);
+  }
+  tree.insertSon(10);
+  SECTION ("Tamnho da árvore deve ser 2 e o item do primeiro filho deve ser 10") {
+    CHECK (tree.size() == 2 );
+  }
+}

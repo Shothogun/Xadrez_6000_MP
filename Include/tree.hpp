@@ -26,23 +26,30 @@ public:
   Tree();
   ~Tree();
   int size() const;
-  const Item& item() const;
   Item& item();
+  const Item& item() const;
   void insertRoot(const Item& item);
+  void insertSon(const Item& item);
 private:
   /** Strutura que guarda os itens contidos na árvore e serve de conector entre
   os nós da árvore.
   */
   struct Node {
     Item item_;  /// Item holded by the node.
-    Node* dad_;  /// Dad of the node.
     std::vector<Node*> sons_;  /// Array of poiters to the sons of the node.
   }; // struct Node
+  /** Estrutura que guarda informação sobre uma aresta percorrida pelo
+  iterador.
+  */
+  struct Edge {
+    Node* dad; /// Nó pai da aresta.
+    int num_son;  /// Número do filho para o qual o itearador foi.
+  }; // struct Edge
   /** Estrutura que pode se mover pelos nós da árvore.
   */
   struct Iterator {
     Node* current_;  /// Poiter to the current node.
-    std::stack<int> path_;  /// Path from the root node to the current node.
+    std::stack<Edge> path_;  /// Path from the root node to the current node.
   }; // struct Iterator
 private:
   /** Deletar todos os nós a partir do \var src e diminuir tamanho da árvore.
@@ -59,6 +66,7 @@ private:
 template <class Item>
 Tree<Item>::Tree() :
   root_(nullptr), size_(0) {
+  iterator_.current_ = nullptr;
 } // Tree::Tree()
 
 template <class Item>
@@ -73,12 +81,12 @@ int Tree<Item>::size() const {
 }  // size()
 
 template <class Item>
-const Item& Tree<Item>::item() const {
+Item& Tree<Item>::item() {
   return iterator_.current_->item_;
 } // Tree::item()
 
 template <class Item>
-Item& Tree<Item>::item() {
+const Item& Tree<Item>::item() const {
   return iterator_.current_->item_;
 } // Tree::item()
 
@@ -86,16 +94,28 @@ template <class Item>
 void Tree<Item>::insertRoot(const Item& item) {
   if (root_ != nullptr)
     clearNodes(root_);
-  root_ = new Tree<Item>::Node;
+  root_ = new   Node;
   root_->item_ = item;
-  root_->dad_ = nullptr;
   ++size_;
   iterator_.current_ = root_;
-  iterator_.path_ = std::stack<int>();
 } // insertRoot()
 
 template <class Item>
-void Tree<Item>::clearNodes(Tree<Item>::Node* src) {
+void Tree<Item>::insertSon(const Item& item) {
+  if (iterator_.current_ == nullptr) {
+    insertRoot(item);
+    return;
+  } // if (iterator_.current_ == nullptr)
+  Node* son_node = new Node;
+  son_node->item_ = item;
+  iterator_.current_->sons_.push_back(son_node);
+  ++size_;
+} // Tree::insertSon()
+
+// private methods /////////////////////////////////////////////////////////////
+
+template <class Item>
+void Tree<Item>::clearNodes(Node* src) {
   for (int son = 0; son < src->sons_.size(); ++son)
     clearNodes(src->sons_[son]);
   delete src;
