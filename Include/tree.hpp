@@ -24,7 +24,10 @@ template <class Item>
 class Tree {
 public:
   Tree();
+  ~Tree();
   int size() const;
+  const Item& item() const;
+  Item& item();
   void insertRoot(const Item& item);
 private:
   /** Strutura que guarda os itens contidos na árvore e serve de conector entre
@@ -59,13 +62,28 @@ Tree<Item>::Tree() :
 } // Tree::Tree()
 
 template <class Item>
+Tree<Item>::~Tree() {
+  if (root_ != nullptr)
+    clearNodes(root_);
+}
+
+template <class Item>
 int Tree<Item>::size() const {
   return size_;
 }  // size()
 
 template <class Item>
+const Item& Tree<Item>::item() const {
+  return iterator_.current_->item_;
+} // Tree::item()
+
+template <class Item>
+Item& Tree<Item>::item() {
+  return iterator_.current_->item_;
+} // Tree::item()
+
+template <class Item>
 void Tree<Item>::insertRoot(const Item& item) {
-  Tree<Item>::Node* node;
   if (root_ != nullptr)
     clearNodes(root_);
   root_ = new Tree<Item>::Node;
