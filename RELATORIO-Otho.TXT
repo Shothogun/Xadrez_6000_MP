@@ -21,3 +21,5 @@ funções
 23/06				1h22min							1							Introdução à SDK QT e baixar IDE
 
 23/06					1h								2							Discussão acerca de como cada módulo ser interagirá entre si
+
+27/06				 2h10min						1,8					Estudar, testar códigos Qt e criar projeto Qt
