@@ -13,11 +13,7 @@ TEST_CASE ("Construtor") {
 TEST_CASE ("Inserir raiz") {
   chess::Tree<int> tree;
   tree.insertRoot(0);
-<<<<<<< HEAD
   SECTION ("Arvore apenas contém o item 0 em sua raiz") {
-=======
-  SECTION ("Ver se o tamanho da árvore é 1 e contém o item certo") {
->>>>>>> 6c76e12754c9dda93ad5ecb3fa7c46d097d68d1e
     CHECK (tree.size() == 1);
     CHECK (tree.item() == 0);
   }
