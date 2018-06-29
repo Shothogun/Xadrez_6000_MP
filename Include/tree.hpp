@@ -32,10 +32,11 @@ public:
   int numSons() const;
   bool gotoDad() const;
   bool gotoSon(int num_son) const;
+  bool gotoRoot();
   void insertRoot(const Item& item);
   void insertSon(const Item& item);
 private:
-  /** Strutura que guarda os itens contidos na árvore e serve de conector entre
+  /** Estrutura que guarda os itens contidos na árvore e serve de conector entre
   os nós da árvore.
   */
   struct Node {
@@ -59,7 +60,7 @@ private:
   /** Deletar todos os nós a partir do \var src e diminuir tamanho da árvore.
   @param src   Nó que será ponto de origen da limpeza da função.
   */
-  void clearNodes(Node* src);
+  void deleteNode(Node* src);
 private:
   Node* root_;  /// Raiz da árvore.
   int size_;   /// Número de itens da árvore.
@@ -76,7 +77,7 @@ Tree<Item>::Tree() :
 template <class Item>
 Tree<Item>::~Tree() {
   if (root_ != nullptr)
-    clearNodes(root_);
+    deleteNode(root_);
 }
 
 template <class Item>
@@ -133,7 +134,7 @@ bool Tree<Item>::gotoSon(int num_son) const {
 template <class Item>
 void Tree<Item>::insertRoot(const Item& item) {
   if (root_ != nullptr)
-    clearNodes(root_);
+    deleteNode(root_);
   root_ = new   Node;
   root_->item_ = item;
   ++size_;
@@ -155,12 +156,12 @@ void Tree<Item>::insertSon(const Item& item) {
 // private methods /////////////////////////////////////////////////////////////
 
 template <class Item>
-void Tree<Item>::clearNodes(Node* src) {
+void Tree<Item>::deleteNode(Node* src) {
   for (int son = 0; son < src->sons_.size(); ++son)
-    clearNodes(src->sons_[son]);
+    deleteNode(src->sons_[son]);
   delete src;
   --size_;
-} // Tree::clearNodes()
+} // Tree::deleteNode()
 
 } // namespace chess
 #endif // TREE_HPP_
