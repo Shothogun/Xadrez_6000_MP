@@ -5,8 +5,9 @@
 
 TEST_CASE ("Construtor") {
   chess::Tree<int> tree;
-  SECTION ( "Função size") {
+  SECTION ( "Árvore vazia sem nenhum nó") {
     CHECK (tree.size() == 0);
+    CHECK (tree.isRoot() == false);
   }
 }
 
@@ -16,6 +17,7 @@ TEST_CASE ("Inserir raiz") {
   SECTION ("Arvore apenas contém o item 0 em sua raiz") {
     CHECK (tree.size() == 1);
     CHECK (tree.item() == 0);
+    CHECK (tree.isRoot() == true);
   }
   tree.insertRoot(1);
   SECTION ("Sobreposição de inserção de raízes deve resultar em uma nova árvore") {
@@ -36,3 +38,5 @@ TEST_CASE ("Inserir filho na raiz") {
     CHECK (tree.size() == 2 );
   }
 }
+
+// falta testar is root quando estiver num nó que não for root.

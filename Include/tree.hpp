@@ -28,6 +28,10 @@ public:
   int size() const;
   Item& item();
   const Item& item() const;
+  bool isRoot() const;
+  int numSons() const;
+  bool gotoDad() const;
+  bool gotoSon() const;
   void insertRoot(const Item& item);
   void insertSon(const Item& item);
 private:
@@ -59,7 +63,7 @@ private:
 private:
   Node* root_;  /// Raiz da árvore.
   int size_;   /// Número de itens da árvore.
-  Iterator iterator_;  /// Iterador que se move pela árvore.
+  mutable Iterator iterator_;  /// Iterador que se move pela árvore.
 };
 
 
@@ -89,6 +93,22 @@ template <class Item>
 const Item& Tree<Item>::item() const {
   return iterator_.current_->item_;
 } // Tree::item()
+
+template <class Item>
+bool Tree<Item>::isRoot() const {
+  if (iterator_.current_ != nullptr && iterator_.path_.size() == 0)
+    return true;
+  else
+    return false;
+} // isRoot()
+
+template <class Item>
+int Tree<Item>::numSons() const {
+  if (iterator_.current_ == nullptr)
+    return -1;
+  else
+    return iterator_.current_->sons_.size();
+}
 
 template <class Item>
 void Tree<Item>::insertRoot(const Item& item) {
