@@ -43,11 +43,11 @@ private:
     std::vector<Node*> sons_;  /// Array of poiters to the sons of the node.
   }; // struct Node
   /** Estrutura que guarda informação sobre uma aresta percorrida pelo
-  iterador.
+  iterator.
   */
   struct Edge {
-    Node* dad; /// Nó pai da aresta.
-    int num_son;  /// Número do filho para o qual o itearador foi.
+    Node* dad_; /// Nó pai da aresta.
+    int num_son_;  /// Número do filho para o qual o itearador foi.
   }; // struct Edge
   /** Estrutura que pode se mover pelos nós da árvore.
   */
@@ -110,6 +110,14 @@ int Tree<Item>::numSons() const {
     return iterator_.current_->sons_.size();
 }
 
+template <class Item>
+bool Tree<Item>::gotoDad() const {
+  if (iterator_.path_.size() == 0)
+    return false;
+  iterator_.current_ = iterator_.path_.top().dad_;
+  iterator_.path_.pop();
+  return true;
+}
 template <class Item>
 bool Tree<Item>::gotoSon(int num_son) const {
   if (iterator_.current_ == nullptr)

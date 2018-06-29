@@ -10,6 +10,7 @@ TEST_CASE ("Construtor") {
     CHECK (tree.isRoot() == false);
     CHECK (tree.numSons() == -1);
     CHECK (tree.gotoSon(0) == false);
+    CHECK (tree.gotoDad() == false);
   }
 }
 
@@ -21,6 +22,7 @@ TEST_CASE ("Inserir raiz") {
     CHECK (tree.item() == 0);
     CHECK (tree.isRoot() == true);
     CHECK (tree.numSons() == 0);
+    CHECK (tree.gotoDad() == false);
   }
   tree.insertRoot(1);
   SECTION ("Sobreposição de inserção de raízes deve resultar em uma nova árvore") {
@@ -41,6 +43,8 @@ TEST_CASE ("Inserir filho na raiz") {
     CHECK (tree.gotoSon(0) == true);
     CHECK (tree.isRoot() == false);
     CHECK (tree.item() == 10);
+    CHECK (tree.gotoDad() == true);
+    CHECK (tree.item() == 0);
   }
 }
 
