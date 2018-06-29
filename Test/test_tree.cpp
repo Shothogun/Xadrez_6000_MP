@@ -7,10 +7,10 @@ TEST_CASE ("Construtor") {
   chess::Tree<int> tree;
   SECTION ( "Árvore vazia sem nenhum nó") {
     CHECK (tree.size() == 0);
-    CHECK (tree.isRoot() == false);
-    CHECK (tree.numSons() == -1);
-    CHECK (tree.gotoSon(0) == false);
-    CHECK (tree.gotoDad() == false);
+    CHECK (tree.isRootNode() == false);
+    CHECK (tree.numSonsNode() == -1);
+    CHECK (tree.gotoSonNode(0) == false);
+    CHECK (tree.gotoDadNode() == false);
   }
 }
 
@@ -19,17 +19,17 @@ TEST_CASE ("Inserir raiz") {
   tree.insertRoot(0);
   SECTION ("Arvore apenas contém o item 0 em sua raiz") {
     CHECK (tree.size() == 1);
-    CHECK (tree.item() == 0);
-    CHECK (tree.isRoot() == true);
-    CHECK (tree.numSons() == 0);
-    CHECK (tree.gotoDad() == false);
+    CHECK (tree.itemNode() == 0);
+    CHECK (tree.isRootNode() == true);
+    CHECK (tree.numSonsNode() == 0);
+    CHECK (tree.gotoDadNode() == false);
   }
   tree.insertRoot(1);
   SECTION ("Sobreposição de inserção de raízes deve resultar em uma nova árvore") {
     CHECK (tree.size() == 1);
-    CHECK (tree.item() == 1);
-    CHECK (tree.isRoot() == true);
-    CHECK (tree.numSons() == 0);
+    CHECK (tree.itemNode() == 1);
+    CHECK (tree.isRootNode() == true);
+    CHECK (tree.numSonsNode() == 0);
   }
 }
 
@@ -39,12 +39,12 @@ TEST_CASE ("Inserir filho na raiz") {
   tree.insertSon(10);
   SECTION ("Tamanho da árvore deve ser 2 e o item do primeiro filho deve ser 10") {
     CHECK (tree.size() == 2);
-    CHECK (tree.gotoSon(-1) == false);
-    CHECK (tree.gotoSon(0) == true);
-    CHECK (tree.isRoot() == false);
-    CHECK (tree.item() == 10);
-    CHECK (tree.gotoDad() == true);
-    CHECK (tree.item() == 0);
+    CHECK (tree.gotoSonNode(-1) == false);
+    CHECK (tree.gotoSonNode(0) == true);
+    CHECK (tree.isRootNode() == false);
+    CHECK (tree.itemNode() == 10);
+    CHECK (tree.gotoDadNode() == true);
+    CHECK (tree.itemNode() == 0);
   }
 }
 

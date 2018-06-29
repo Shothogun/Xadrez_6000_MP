@@ -26,12 +26,12 @@ public:
   Tree();
   ~Tree();
   int size() const;
-  Item& item();
-  const Item& item() const;
-  bool isRoot() const;
-  int numSons() const;
-  bool gotoDad() const;
-  bool gotoSon(int num_son) const;
+  Item& itemNode();
+  const Item& itemNode() const;
+  bool isRootNode() const;
+  int numSonsNode() const;
+  bool gotoDadNode() const;
+  bool gotoSonNode(int num_son) const;
   bool gotoRoot();
   void insertRoot(const Item& item);
   void insertSon(const Item& item);
@@ -86,25 +86,25 @@ int Tree<Item>::size() const {
 }  // size()
 
 template <class Item>
-Item& Tree<Item>::item() {
+Item& Tree<Item>::itemNode() {
   return iterator_.current_->item_;
-} // Tree::item()
+} // Tree::itemNode()
 
 template <class Item>
-const Item& Tree<Item>::item() const {
+const Item& Tree<Item>::itemNode() const {
   return iterator_.current_->item_;
-} // Tree::item()
+} // Tree::itemNode()
 
 template <class Item>
-bool Tree<Item>::isRoot() const {
+bool Tree<Item>::isRootNode() const {
   if (iterator_.current_ != nullptr && iterator_.path_.size() == 0)
     return true;
   else
     return false;
-} // isRoot()
+} // isRootNode()
 
 template <class Item>
-int Tree<Item>::numSons() const {
+int Tree<Item>::numSonsNode() const {
   if (iterator_.current_ == nullptr)
     return -1;
   else
@@ -112,7 +112,7 @@ int Tree<Item>::numSons() const {
 }
 
 template <class Item>
-bool Tree<Item>::gotoDad() const {
+bool Tree<Item>::gotoDadNode() const {
   if (iterator_.path_.size() == 0)
     return false;
   iterator_.current_ = iterator_.path_.top().dad_;
@@ -120,7 +120,7 @@ bool Tree<Item>::gotoDad() const {
   return true;
 }
 template <class Item>
-bool Tree<Item>::gotoSon(int num_son) const {
+bool Tree<Item>::gotoSonNode(int num_son) const {
   if (iterator_.current_ == nullptr)
     return false;
   if (num_son < 0 || num_son >= iterator_.current_->sons_.size())
