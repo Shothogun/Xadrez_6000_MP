@@ -31,7 +31,7 @@ public:
   bool isRoot() const;
   int numSons() const;
   bool gotoDad() const;
-  bool gotoSon() const;
+  bool gotoSon(int num_son) const;
   void insertRoot(const Item& item);
   void insertSon(const Item& item);
 private:
@@ -108,6 +108,18 @@ int Tree<Item>::numSons() const {
     return -1;
   else
     return iterator_.current_->sons_.size();
+}
+
+template <class Item>
+bool Tree<Item>::gotoSon(int num_son) const {
+  if (iterator_.current_ == nullptr)
+    return false;
+  if (num_son < 0 || num_son >= iterator_.current_->sons_.size())
+    return false;
+  Edge edge = {iterator_.current_, num_son};
+  iterator_.current_ = iterator_.current_->sons_[num_son];
+  iterator_.path_.push(edge);
+  return true;
 }
 
 template <class Item>

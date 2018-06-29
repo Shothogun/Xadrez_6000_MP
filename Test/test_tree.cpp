@@ -9,6 +9,7 @@ TEST_CASE ("Construtor") {
     CHECK (tree.size() == 0);
     CHECK (tree.isRoot() == false);
     CHECK (tree.numSons() == -1);
+    CHECK (tree.gotoSon(0) == false);
   }
 }
 
@@ -35,7 +36,11 @@ TEST_CASE ("Inserir filho na raiz") {
   tree.insertSon(0);
   tree.insertSon(10);
   SECTION ("Tamanho da árvore deve ser 2 e o item do primeiro filho deve ser 10") {
-    CHECK (tree.size() == 2 );
+    CHECK (tree.size() == 2);
+    CHECK (tree.gotoSon(-1) == false);
+    CHECK (tree.gotoSon(0) == true);
+    CHECK (tree.isRoot() == false);
+    CHECK (tree.item() == 10);
   }
 }
 
