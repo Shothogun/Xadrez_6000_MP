@@ -11,6 +11,7 @@ TEST_CASE ("Construtor") {
     CHECK (tree.numSonsNode() == -1);
     CHECK (tree.gotoSonNode(0) == false);
     CHECK (tree.gotoDadNode() == false);
+    CHECK (tree.gotoRootNode() == false);
   }
 }
 
@@ -44,6 +45,8 @@ TEST_CASE ("Inserir filho na raiz") {
     CHECK (tree.isRootNode() == false);
     CHECK (tree.itemNode() == 10);
     CHECK (tree.gotoDadNode() == true);
+    CHECK (tree.itemNode() == 0);
+    CHECK (tree.gotoRootNode() == true);
     CHECK (tree.itemNode() == 0);
   }
 }

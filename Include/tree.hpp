@@ -32,7 +32,7 @@ public:
   int numSonsNode() const;
   bool gotoDadNode() const;
   bool gotoSonNode(int num_son) const;
-  bool gotoRoot();
+  bool gotoRootNode() const;
   void insertRoot(const Item& item);
   void insertSon(const Item& item);
 private:
@@ -109,6 +109,15 @@ int Tree<Item>::numSonsNode() const {
     return -1;
   else
     return iterator_.current_->sons_.size();
+}
+
+template <class Item>
+bool Tree<Item>::gotoRootNode() const {
+  if (root_ == nullptr)
+    return false;
+  iterator_.current_ = root_;
+  iterator_.path_ = std::stack<Edge>();
+  return true;
 }
 
 template <class Item>
