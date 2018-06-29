@@ -34,7 +34,8 @@ public:
   bool gotoSonNode(int num_son) const;
   bool gotoRootNode() const;
   void insertRoot(const Item& item);
-  void insertSon(const Item& item);
+  void insertSonNode(const Item& item);
+  void clearNode();
 private:
   /** Estrutura que guarda os itens contidos na árvore e serve de conector entre
   os nós da árvore.
@@ -151,7 +152,7 @@ void Tree<Item>::insertRoot(const Item& item) {
 } // insertRoot()
 
 template <class Item>
-void Tree<Item>::insertSon(const Item& item) {
+void Tree<Item>::insertSonNode(const Item& item) {
   if (iterator_.current_ == nullptr) {
     insertRoot(item);
     return;
@@ -160,7 +161,7 @@ void Tree<Item>::insertSon(const Item& item) {
   son_node->item_ = item;
   iterator_.current_->sons_.push_back(son_node);
   ++size_;
-} // Tree::insertSon()
+} // Tree::insertSonNode()
 
 // private methods /////////////////////////////////////////////////////////////
 

@@ -36,8 +36,8 @@ TEST_CASE ("Inserir raiz") {
 
 TEST_CASE ("Inserir filho na raiz") {
   chess::Tree<int> tree;
-  tree.insertSon(0);
-  tree.insertSon(10);
+  tree.insertSonNode(0);
+  tree.insertSonNode(10);
   SECTION ("Tamanho da árvore deve ser 2 e o item do primeiro filho deve ser 10") {
     CHECK (tree.size() == 2);
     CHECK (tree.gotoSonNode(-1) == false);
