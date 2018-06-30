@@ -73,12 +73,46 @@ TEST_CASE ("Limpando nós") {
   }
   tree.insertSonNode(10);
   tree.gotoSonNode(0);
-  SECTION ("Remover primeiro filho do nó raiz (nutella)") {
+  SECTION ("Remover primeiro filho do nó raiz (nó nutella)") {
     tree.removeNode();
     CHECK (tree.size() == 1);
     CHECK (tree.itemNode() == 0);
     CHECK (tree.isRootNode() == true);
     CHECK (tree.numSonsNode() == 0);
     CHECK (tree.gotoDadNode() == false);
+  }
+}
+
+TEST_CASE ("Copiando árvores") {
+  chess::Tree<int> a;
+  chess::Tree<int> b(a);
+  SECTION ("Árvore 'b' tem de ser vazia assim como o 'a'") {
+    CHECK (b.size() == 0);
+    CHECK (b.isRootNode() == false);
+    CHECK (b.numSonsNode() == -1);
+    CHECK (b.gotoSonNode(0) == false);
+    CHECK (b.gotoDadNode() == false);
+    CHECK (b.gotoRootNode() == false);
+  }
+  a.insertRoot(0);
+  a.insertSonNode(10);
+  a.gotoSonNode(0);
+  SECTION ("Árvore 'b' tem de ser independente da 'a'") {
+    CHECK (b.size() == 0);
+    CHECK (b.isRootNode() == false);
+    CHECK (b.numSonsNode() == -1);
+    CHECK (b.gotoSonNode(0) == false);
+    CHECK (b.gotoDadNode() == false);
+    CHECK (b.gotoRootNode() == false);
+  }
+  chess::Tree<int> c(a);
+  SECTION ("A árvore 'c' deve ser identica ao 'a'") {
+    CHECK (c.size() == 2);
+    CHECK (c.isRootNode() == false);
+    CHECK (c.numSonsNode() == 0);
+    CHECK (c.gotoSonNode(0) == false);
+    CHECK (c.itemNode() == 10);
+    CHECK (c.gotoDadNode() == true);
+    CHECK (c.itemNode() == 0);
   }
 }

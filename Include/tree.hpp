@@ -24,6 +24,7 @@ template <class Item>
 class Tree {
 public:
   Tree();
+  Tree(const Tree& other);
   ~Tree();
   int size() const;
   Item& itemNode();
@@ -62,6 +63,12 @@ private:
   @param src   Nó que será ponto de origen da limpeza da função.
   */
   void deleteNode(Node* src);
+  /** Copiar nó com todos seus descendentes, acrescentando valor ao tamanho da
+  árvore.
+  @param src Raiz da subárvore a ser copirada.
+  @return Ponteiro para a raiz da sub-árvore criada.
+  */
+  Node* copyNode(Node* src);
 private:
   Node* root_;  /// Raiz da árvore.
   int size_;   /// Número de itens da árvore.
@@ -73,6 +80,26 @@ template <class Item>
 Tree<Item>::Tree() :
   root_(nullptr), size_(0) {
   iterator_.node_ = nullptr;
+} // Tree::Tree()
+
+template <class Item>
+Tree<Item>::Tree(const Tree& other) :
+  root_(nullptr), size_(0) {
+  if (other.root_ == nullptr) {
+    iterator_.node_ = nullptr;
+    return;
+  } // if (other.root_ == nullptr)
+  root_ = copyNode(other.root_);
+  iterator_.node_ = root_;
+  // Copy iterator positions;
+  iterator_.path_ = other.iterator_.path_;
+  std::vector<int> inverse_path;
+  while (iterator_.path_.size() > 0) {
+    inverse_path.push_back(iterator_.path_.top().num_son_);
+    iterator_.path_.pop();  
+  }
+  for (int deep = inverse_path.size() - 1; deep >= 0 ; --deep)
+    this->gotoSonNode(inverse_path[deep]);
 } // Tree::Tree()
 
 template <class Item>
@@ -181,6 +208,16 @@ void Tree<Item>::removeNode() {
 }
 
 // private methods /////////////////////////////////////////////////////////////
+
+template <class Item>
+typename Tree<Item>::Node* Tree<Item>::copyNode(Node* src) {
+  Node* copy = new Node;
+  copy->item_ = src->item_;
+  for (int son = 0; son < src->sons_.size(); ++son  )
+    copy->sons_.push_back(copyNode(src->sons_[son]));
+  size_++;
+  return copy;
+} // Tree::copyNode()
 
 template <class Item>
 void Tree<Item>::deleteNode(Node* src) {
