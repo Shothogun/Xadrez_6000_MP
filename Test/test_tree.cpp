@@ -115,4 +115,24 @@ TEST_CASE ("Copiando árvores") {
     CHECK (c.gotoDadNode() == true);
     CHECK (c.itemNode() == 0);
   }
+  chess::Tree<int> d;
+  d = a;
+  SECTION ("A árvore 'd' deve ser identica ao 'a'") {
+    CHECK (d.size() == 2);
+    CHECK (d.isRootNode() == false);
+    CHECK (d.numSonsNode() == 0);
+    CHECK (d.gotoSonNode(0) == false);
+    CHECK (d.itemNode() == 10);
+    CHECK (d.gotoDadNode() == true);
+    CHECK (d.itemNode() == 0);
+  }
+  d = b;
+  SECTION ("Árvore 'd' tem de ser vazia assim como o 'b'") {
+    CHECK (d.size() == 0);
+    CHECK (d.isRootNode() == false);
+    CHECK (d.numSonsNode() == -1);
+    CHECK (d.gotoSonNode(0) == false);
+    CHECK (d.gotoDadNode() == false);
+    CHECK (d.gotoRootNode() == false);
+  }
 }

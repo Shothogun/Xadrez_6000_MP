@@ -37,6 +37,7 @@ public:
   void insertRoot(const Item& item);
   void insertSonNode(const Item& item);
   void removeNode();
+  Tree& operator=(const Tree& other);
 private:
   /** Estrutura que guarda os itens contidos na árvore e serve de conector entre
   os nós da árvore.
@@ -91,12 +92,12 @@ Tree<Item>::Tree(const Tree& other) :
   } // if (other.root_ == nullptr)
   root_ = copyNode(other.root_);
   iterator_.node_ = root_;
-  // Copy iterator positions;
+  // Copy iterator position;
   iterator_.path_ = other.iterator_.path_;
   std::vector<int> inverse_path;
   while (iterator_.path_.size() > 0) {
     inverse_path.push_back(iterator_.path_.top().num_son_);
-    iterator_.path_.pop();  
+    iterator_.path_.pop();
   }
   for (int deep = inverse_path.size() - 1; deep >= 0 ; --deep)
     this->gotoSonNode(inverse_path[deep]);
@@ -206,6 +207,30 @@ void Tree<Item>::removeNode() {
     iterator_.path_.pop();
   } // if (iterator_.node_)
 }
+
+template <class Item>
+Tree<Item>& Tree<Item>::operator=(const Tree& other) {
+  if (this->root_ != nullptr) {
+    deleteNode(root_);
+    root_ = nullptr;
+    iterator_.node_ = nullptr;
+    while (iterator_.path_.size() > 0) iterator_.path_.pop();
+  } // if (this->root != nullptr)
+  if (other.root_ == nullptr)
+    return *this;
+  root_ = copyNode(other.root_);
+  iterator_.node_ = root_;
+  // Copy iterator position;
+  iterator_.path_ = other.iterator_.path_;
+  std::vector<int> inverse_path;
+  while (iterator_.path_.size() > 0) {
+    inverse_path.push_back(iterator_.path_.top().num_son_);
+    iterator_.path_.pop();
+  }
+  for (int deep = inverse_path.size() - 1; deep >= 0 ; --deep)
+    this->gotoSonNode(inverse_path[deep]);
+  return *this;
+} // Tree::=(other)
 
 // private methods /////////////////////////////////////////////////////////////
 
