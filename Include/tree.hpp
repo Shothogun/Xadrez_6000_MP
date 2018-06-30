@@ -35,7 +35,7 @@ public:
   bool gotoRootNode() const;
   void insertRoot(const Item& item);
   void insertSonNode(const Item& item);
-  void clearNode();
+  void removeNode();
 private:
   /** Estrutura que guarda os itens contidos na árvore e serve de conector entre
   os nós da árvore.
@@ -54,7 +54,7 @@ private:
   /** Estrutura que pode se mover pelos nós da árvore.
   */
   struct Iterator {
-    Node* current_;  /// Poiter to the current node.
+    Node* node_;  /// Poiter to the current node.
     std::stack<Edge> path_;  /// Path from the root node to the current node.
   }; // struct Iterator
 private:
@@ -72,7 +72,7 @@ private:
 template <class Item>
 Tree<Item>::Tree() :
   root_(nullptr), size_(0) {
-  iterator_.current_ = nullptr;
+  iterator_.node_ = nullptr;
 } // Tree::Tree()
 
 template <class Item>
@@ -88,17 +88,17 @@ int Tree<Item>::size() const {
 
 template <class Item>
 Item& Tree<Item>::itemNode() {
-  return iterator_.current_->item_;
+  return iterator_.node_->item_;
 } // Tree::itemNode()
 
 template <class Item>
 const Item& Tree<Item>::itemNode() const {
-  return iterator_.current_->item_;
+  return iterator_.node_->item_;
 } // Tree::itemNode()
 
 template <class Item>
 bool Tree<Item>::isRootNode() const {
-  if (iterator_.current_ != nullptr && iterator_.path_.size() == 0)
+  if (iterator_.node_ != nullptr && iterator_.path_.size() == 0)
     return true;
   else
     return false;
@@ -106,17 +106,17 @@ bool Tree<Item>::isRootNode() const {
 
 template <class Item>
 int Tree<Item>::numSonsNode() const {
-  if (iterator_.current_ == nullptr)
+  if (iterator_.node_ == nullptr)
     return -1;
   else
-    return iterator_.current_->sons_.size();
+    return iterator_.node_->sons_.size();
 }
 
 template <class Item>
 bool Tree<Item>::gotoRootNode() const {
   if (root_ == nullptr)
     return false;
-  iterator_.current_ = root_;
+  iterator_.node_ = root_;
   iterator_.path_ = std::stack<Edge>();
   return true;
 }
@@ -125,18 +125,18 @@ template <class Item>
 bool Tree<Item>::gotoDadNode() const {
   if (iterator_.path_.size() == 0)
     return false;
-  iterator_.current_ = iterator_.path_.top().dad_;
+  iterator_.node_ = iterator_.path_.top().dad_;
   iterator_.path_.pop();
   return true;
 }
 template <class Item>
 bool Tree<Item>::gotoSonNode(int num_son) const {
-  if (iterator_.current_ == nullptr)
+  if (iterator_.node_ == nullptr)
     return false;
-  if (num_son < 0 || num_son >= iterator_.current_->sons_.size())
+  if (num_son < 0 || num_son >= iterator_.node_->sons_.size())
     return false;
-  Edge edge = {iterator_.current_, num_son};
-  iterator_.current_ = iterator_.current_->sons_[num_son];
+  Edge edge = {iterator_.node_, num_son};
+  iterator_.node_ = iterator_.node_->sons_[num_son];
   iterator_.path_.push(edge);
   return true;
 }
@@ -148,20 +148,37 @@ void Tree<Item>::insertRoot(const Item& item) {
   root_ = new   Node;
   root_->item_ = item;
   ++size_;
-  iterator_.current_ = root_;
+  iterator_.node_ = root_;
 } // insertRoot()
 
 template <class Item>
 void Tree<Item>::insertSonNode(const Item& item) {
-  if (iterator_.current_ == nullptr) {
+  if (iterator_.node_ == nullptr) {
     insertRoot(item);
     return;
-  } // if (iterator_.current_ == nullptr)
+  } // if (iterator_.node_ == nullptr)
   Node* son_node = new Node;
   son_node->item_ = item;
-  iterator_.current_->sons_.push_back(son_node);
+  iterator_.node_->sons_.push_back(son_node);
   ++size_;
 } // Tree::insertSonNode()
+
+template <class Item>
+void Tree<Item>::removeNode() {
+  if (iterator_.node_ == nullptr)
+    return;
+  if (iterator_.node_ == root_) {
+    deleteNode(iterator_.node_);
+    root_ = nullptr;
+    iterator_.node_ = nullptr;
+  } else {
+    deleteNode(iterator_.node_);
+    iterator_.node_ = iterator_.path_.top().dad_;
+    iterator_.node_->sons_.erase(iterator_.node_->sons_.begin()
+                                 + iterator_.path_.top().num_son_);
+    iterator_.path_.pop();
+  } // if (iterator_.node_)
+}
 
 // private methods /////////////////////////////////////////////////////////////
 

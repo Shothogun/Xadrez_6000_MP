@@ -51,4 +51,34 @@ TEST_CASE ("Inserir filho na raiz") {
   }
 }
 
-// falta testar is root quando estiver num nó que não for root.
+TEST_CASE ("Limpando nós") {
+  chess::Tree<int> tree;
+  SECTION ("Remover árvore sem nós") {
+    tree.removeNode();
+    CHECK (tree.isRootNode() == false);
+    CHECK (tree.numSonsNode() == -1);
+    CHECK (tree.gotoSonNode(0) == false);
+    CHECK (tree.gotoDadNode() == false);
+    CHECK (tree.gotoRootNode() == false);
+  }
+  tree.insertRoot(0);
+  SECTION ("Remover raiz") {
+    tree.removeNode();
+    CHECK (tree.size() == 0);
+    CHECK (tree.isRootNode() == false);
+    CHECK (tree.numSonsNode() == -1);
+    CHECK (tree.gotoSonNode(0) == false);
+    CHECK (tree.gotoDadNode() == false);
+    CHECK (tree.gotoRootNode() == false);
+  }
+  tree.insertSonNode(10);
+  tree.gotoSonNode(0);
+  SECTION ("Remover primeiro filho do nó raiz (nutella)") {
+    tree.removeNode();
+    CHECK (tree.size() == 1);
+    CHECK (tree.itemNode() == 0);
+    CHECK (tree.isRootNode() == true);
+    CHECK (tree.numSonsNode() == 0);
+    CHECK (tree.gotoDadNode() == false);
+  }
+}
