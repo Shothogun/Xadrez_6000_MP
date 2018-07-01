@@ -34,7 +34,7 @@ LIBS  = -lm
 CFLAGS = -std=c++14 -c -Wall -W -Wextra -I $(DIR_INCLUDE)
 
 # LCOV directory name
-LCOV = lcov_html
+LCOV = test_Tree.HTML
 
 # ################ #############################################################
 

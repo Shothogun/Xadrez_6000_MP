@@ -238,7 +238,7 @@ template <class Item>
 typename Tree<Item>::Node* Tree<Item>::copyNode(Node* src) {
   Node* copy = new Node;
   copy->item_ = src->item_;
-  for (int son = 0; son < src->sons_.size(); ++son  )
+  for (int son = 0; son < src->sons_.size(); ++son)
     copy->sons_.push_back(copyNode(src->sons_[son]));
   size_++;
   return copy;
