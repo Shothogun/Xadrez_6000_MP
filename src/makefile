@@ -27,13 +27,13 @@ T_OBJ = $(patsubst %,$(ODIR)/%,$(_T_OBJ))
 T_SRC = $(patsubst %,$(T_SDIR)/%,$(wildcard *.cc))
 
 $(ODIR)/%.o: %.cc $(DEPS)
-	$(CC) -c -o $@ $< $(CXXFLAGS) $(DEBUG)
+	$(CC) -c -o $@ $< $(CXXFLAGS) $(GCOVFLAGS) $(DEBUG)
 
 $(ODIR)/%.o: $(T_SDIR)/%.cc $(DEPS)
 	$(CC) -c -o $@ $< $(CXXFLAGS) $(GCOVFLAGS) $(DEBUG)
 
 main: $(OBJ)
-	$(CC) -o $(EDIR)/$@ $^ $(CXXFLAGS) $(LIBS) $(DEBUG)
+	$(CC) -o $(EDIR)/$@ $^ $(CXXFLAGS) $(LIBS) $(GCOVFLAGS) $(DEBUG)
 
 test: $(T_OBJ)
 	$(CC) -o $(T_EDIR)/$@ $^ $(CXXFLAGS) $(LIBS) $(GCOVFLAGS) $(DEBUG)

@@ -57,4 +57,28 @@ Board::Board() {
 Board::~Board() {
 }
 
+int Board::UpdateWeight() {
+
+	weight = 0;
+	std::list <BoardPlace>::iterator it;
+
+	if (white_pieces.empty() != 1) { // Se a lista nao estiver vazia, somar os pesos das pecas
+
+		for (it = white_pieces.begin(); it != white_pieces.end(); it++) {
+
+			weight += it->chess_piece->weight;
+		}
+	}
+
+	if (black_pieces.empty() != 1) { // Se a lista nao estiver vazia, somar os pesos das pecas
+
+		for (it = black_pieces.begin(); it != black_pieces.end(); it++) {
+
+			weight += it->chess_piece->weight;
+		}
+	}
+
+	return weight;
+}
+
 }

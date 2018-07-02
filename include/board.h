@@ -20,7 +20,7 @@ typedef struct Piece {
 */
 
 typedef struct BoardPlace {
-	/**  Piece pointer to the piece at the current location*/
+	/**  Pointer to the piece of the current location*/
 	Piece* chess_piece = NULL;
 
 	/** Chess coordinates of the current location on the board*/
@@ -40,6 +40,7 @@ class Board {
 	public:
 		Board();
 		~Board();
+		int UpdateWeight();
 
 		/**
 			The matrix that stores the actual board
