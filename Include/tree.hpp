@@ -16,362 +16,214 @@
 
 namespace chess {
 
-/** @brief
- *
- @tparam Item  Tipo do item que será manipulado pelos nós das árvores.
+/** Uma árvore enraizada que contém um iterador pelos nós que pode conter
+ variadas quantidades de filhos por nó.
+@details
+  A Classe contém um um ponteiro para um nó raiz e um ponteiro iterador para o
+nó em que este se presencia. Inicinalmente o ponteiro par a raiz da árvore e
+o ponteiro do iterador apontam para o null e assim que se insere uma raiz para
+a árvore, o iterador se move para o nó raiz e o ponteiro da raiz da árvore
+aponta para a raiz. O iterador pode se mover pela árvore livremente o que é
+importante para que o usuário possa exercer funções como acessar os itens da
+árvore.
+@tparam Item
+  Tipo do item que será manipulado pelos nós das árvores.
 */
 template <class Item>
 class Tree {
 public:
-/**
-*Metodo Tree()
-*
-*Descrição:
-* Cria uma estrutura de dados chamada Tree que tem como parametros um ponteiro para a raiz da árvore, um
-*inteiro que indica a quantidade de nós presentes na árvore e um iterador que se move pela árvore conforme a 
-*necessidade.
-* Apos a criação, colocamos o ponteiro para a raiz apontando para NULL, atribuimos o valor 0 para a variavel size 
-*e o iterador está apontado para NULL.
-*
-*Parametros:
-* O metodo Tree não possui parametros de entradas.
-*
-*Valor de retorno:
-* O metodo Tree retorna uma estrutura de dados do tipo Tree com o parametro root e It apontando para NUUL e o inteiro 
-*size com o valor 0,
-*
-*Assertiva de entrada:
-*
-*Assertiva de saida:
-* A estrutura de dados chamada Tree vai ser alocada.
-* A raiz tem valor NULL.
-* O tamanho da árvore é 0.
-* O iterador aponta para NULL.
-*
-*Interfaces explicitas:
-*
-*Interfaces implicitas:
-*/
+  /** Configura a raiz e o iterador apontados para null e zera o tamanho da
+    árvore.
+  @post
+    Variável criada possui raiz e iterador apontados para null e possui tamanho
+  iual a 0.
+  */
   Tree();
-/**
-* Método Tree( const Tree& other)
-*
-* Descrição:
-*   Esse metodo cria uma árvore a partir de outra árvore já existente, fazendo uma copia de todos os nós e todo
-* o conteudo da outra árvore
-*
-* Parametros:
-*   Esse método recebe como parametro a árvore que será clonada na outra árvore
-*
-* Valor retornado:
-*   Esse método não retorna nenhum valor
-* Assertiva de entrada:
-*   A árvore que será feita uma cópia dela deve existir
-*
-* Assertiva de saída:
-*   Uma árvore terá sido criada e ela será uma cópia da outra árvore
-*
-* Interfaces explicitas:
-*   const Tree& other
-* Interfaces implicitas:
-*/
+
+  /** Criar uma árvore a partir de outra árvore já existente, fazendo uma cópia
+    de todos os nós e itens, além da posição do iterador.
+  @param other
+    Árvore a ser clonada.
+  @pre
+    \var other deve ser uma árvore existente com memória alocada corretamente.
+  @post
+    A variável que utilizar esse método será terá memória corretamente alocada,
+  sendo uma cópia da árvore \var other.
+  @post
+    O iterador da nova árvore estará na mesma posição relativa comparado ao
+  iterador da árvore \var other.
+  */
   Tree(const Tree& other);
-/**
-* Método ~Tree()
-*
-* Descrição:
-*   O metodo libera a memória da de todos os nós presentes na Tree
-* 
-* Parametros:
-*   O metodo não possui parametros
-* 
-* Valor retornado:
-*   O metodo retorna void
-*
-* Assertiva de entrada:
-*   A árvore deve estar alocada na memória
-* 
-* Assertiva de saída:
-*   Todos os nós da árvore serão desalocados
-* 
-* Interfaces explicitas:
-*   A arvore Tree
-* Interfaces implicitas:
-*/
+
+  /** Libera a memória da de todos os nós presentes na Tree.
+  @pre
+    A árvore deve estar alocada na memória.
+  @post
+    A memória da árvore se torna desalocada.
+  */
   ~Tree();
-/**
-*Método size()
-*
-*Descrição:
-* Metodo que retorna o valor do tamanho da árvore.
-*
-*Parametros:
-* O metodo size() não possui parametros.
-*
-*Valor Retornado:
-* A função retorna o tamanho da árvore.
-*
-*Assertivas de entrada:
-* 
-*Assertivas de saída:
-*
-*Interfaces explicitas:
-* Tree
-*
-*Interfaces inplicitas: 
-*/
+
+  /** Retorna o valor do tamanho da árvore.
+  @return
+    Número de itens armazenados na árvore.
+  */
   int size() const;
-/**
-* Metodo ItemNode
-*
-* Descrição:
-*   O método retorna referência para o item do nó cujo iterador da árvore está apontando
-*
-* Parametros:
-*   O método não possui parâmetros
-*
-* Valor retornado:
-*   Referência para o item do nó cujo iterador da árvore está apontando
-*
-* Assertiva de entrada:
-*
-* Assertiva de saída:
-*
-* Interfaces explicitas:
-*
-* Interfaces implicitas:
-*/
+
+  /** Recuperar referência para o item do nó em que o iterador se encontra.
+  @return
+    Referência para o item do nó apontado pelo iterador.
+  @pre
+  A memória da árvore deve estar alocada,
+  @pre
+  O iterador deve estar numa posição válida de um nó.
+  @post
+  A árvore não é modificada nessa função.
+  */
   Item& itemNode();
 
-/**
-* Metodo ItemNode
-*
-* Descrição:
-*   O método retorna referência para o item do nó cujo iterador da árvore está apontando
-*
-* Parametros:
-*   O método não possui parâmetros
-*
-* Valor retornado:
-*  Uma referência constante para o item do nó cujo iterador da árvore está apontando
-*
-* Assertiva de entrada:
-*
-* Assertiva de saída:
-*
-* Interfaces explicitas:
-*
-* Interfaces implicitas:
-*/
+  /** Recuperar referência para o item do nó em que o iterador se encontra.
+  @return
+    Referência constante para o item do nó apontado pelo iterador.
+  @pre
+  A memória da árvore deve estar alocada,
+  @pre
+  O iterador deve estar numa posição válida de um nó.
+  @post
+  A árvore não é modificada nessa função.
+  */
   const Item& itemNode() const;
-/**
-* Metodo isRootNode()
-*
-* Descrição:
-*   O método retorna um valor indicando se o nó cujo método foi aplicado é um nó raiz ou não
-*
-* Parametros:
-*   O método acima não possui parametros
-* 
-* Valor retornado:
-*   Esse método retorna True caso o nó cujo método foi aplicado seja uma raiz e retorna False caso contrário
-*
-* Assertiva de entrada:
-*   O nó cujo método foi aplicado precisa estar alocado na memória
-*
-* Assertiva de saída:
-*   Se o nó for raiz da arvore o método retornará True e caso contrário retornará False
-*
-* Interfaces explicitas:
-*   Arvore Tree
-*   Node
-*
-* Interfaces implicitas:
-*/
+
+  /** Descobre se o iterador está no nó que é raiz.
+  @return
+    true, caso o nó apontado pelo iterador seja raiz. false, caso o nó apontado
+  pelo itrador não seja raiz.
+  @pre
+    A árvore deve estar alocada na memória.
+  @pre
+    O nó apontado pelo iterador existe e pertence a árvore.
+  */
   bool isRootNode() const;
-/**
-* Método numSonsNode()
-*
-* Descrição:
-*   O método irá retornar o número de filhos do nó cujo o iterador está
- apontando. Caso o iterador não esteja apontando para nenhum nó, em caso de árvore vazia, retorna-se -1.
-*
-* Parametros:
-* Valor retornado:
-*
-* Assertiva de entrada:
-*
-* Assertiva de saída:
-*
-* Interfaces explicitas:
-*
-* Interfaces implicitas:
-*/
+
+  /** Recupera o número de filhos do nó em que o iterador se posiciona.
+  @return
+    O número de nós filhos que o iterador da árvore se encontra. Ou, caso o
+  iterador aponte para null no caso de uma árvore vazia, retorna-se o valor -1.
+  @pre
+    A memoria da árvore deve estar corretamente alocada.
+  */
   int numSonsNode() const;
-/**
-*Metodo gotoDadNode()
-*
-*Descrição:
-* A partir do iterador da Tree que estará apontado para um nó da árvore esse método irá fazer com que o iterador da árvore vá 
-*para o pai do nó apontado por ele
-*
-*Parametros:
-* Esse método não possui parametros
-*
-*Valor retornado:
-* Esse método retorna True caso tenha conseguido mover o iterador e False caso não tenha conseguido
-*
-*Assertiva de entrada:
-*
-*Assertiva de saída:
-* O iterador da Tree está apontando para o nó desejado
-*
-*Interfaces explicitas:
-* Tree
-*
-*Interfaces implicitas:
-*/
+
+  /** Mover o iterador de um nó para seu pai na árvore.
+  @return
+    true caso foi possível mover o iterador de sua posição atual para o
+  seu pai. false, caso o iterador esteja posicionado em uma raiz ou esteja
+  apontado para null, sendo assim, não se encontra em um nó que contém pais.
+  @pre
+  A memória da árvore deve estar alocada corretamente.
+  @post
+  O iterador foi movido para o nó pai, caso este exista.
+ */
   bool gotoDadNode() const;
-  /**
-*Metodo gotoSonNode()
-*
-*Descrição:
-* A partir do iterador da Tree que estará apontando para um nó da árvore esse método irá fazer com que o iterador da árvore va
-*para o N-esimo filho do nó que estava sendo apontado pelo iterador.
-* Se o nó apontado pelo iterador tiver menos que N filhos, então o método irá retornar false
-*
-*Parametros:
-* Son - Numero da posição do filho no vetor de filhos
-*
-*Valor retornado:
-* Retorna True caso o iterador tenha conseguido ir para o N-esimo filho pedido e retorna False caso não tenha conseguido
-*
-*Assertivas de entrada:
-* Para o iterador se mover para o N-esimo filho do nó é necessário que esse nó tenha no mínimo N filhos
-*
-*Assertivas de saida:
-* O iterador da Tree está apontando para o nó desejado
-*
-*Interfaces explicitas:
-* long int Son
-* Tree
-*
-*Interfaces implicitas:
-*/
+
+  /** Move o iterador do nó em que se encontra para o filho escolhido do nó.
+  @param num_son
+    Um natural indicando a qual dos nós filhos deseja-se mover o iterador da
+  árvore.
+  @return
+    true caso foi possível mover o iterador do nó atual para o filho \var
+  num_son. false caso o nó em que se encontra o iterador não possua o filho
+  desejado ou o iterador está apontado para null.
+ @pre
+    A memória da árvore precisa estar alocada corretamente.
+  @post
+    A estrura da árvore se mantém, mudando-se apenas a posição do iterador para
+  o filho desejado caso seja possível movê-lo.
+  */
   bool gotoSonNode(int num_son) const;
-/**
-* Metodo gotoRootNode()
-*
-* Descrição:
-*   O método faz com que o iterador da Tree vá para a raiz dessa árvore, retornando um valor de acordo com o resultado do método
-*
-* Parâmetros:
-*   O método não possui parâmetros
-*
-* Valor retornado:
-*   O método retorna True caso tenha conseguido mover o iterador para a raiz da árvore e retorna False caso contrário
-*
-* Assertiva de entrada:
-*   A árvore cujo método foi aplicado deve possuir raiz
-*
-* Assertiva de saída:
-*   Ao final do método o iterador da árvore estará apontando para a raiz da mesma
-*
-* Interfaces explicitas:
-*   Tree
-*   Iterador
-*
-* Interfaces implicitas:
-*/
+
+  /** Retornar o iterador da árvore para a raiz caso essa exista.
+  @return
+     true, se a árvore possui uma raiz.
+     false, se a árvore está vazia.
+  @pre
+    A memória da árvore deve estar alocada corretamente.
+  @post
+    O iterador da árvore estará na posição da raiz caso esta exista.
+  */
   bool gotoRootNode() const;
-/**
-*Método insertRoot()
-*
-*Descrição:
-* Se a estrutura Tree em que o método foi aplicado não ṕossui raiz, então alocamos memória para uma raiz, configuramos o item dela 
-*para ser o item passado como parametro, o pai dela como sendo NULL e inicializamos o vetor dos filhos sem elementos
-* Se a estrutura Tree em que o método foi aplicado possui raiz, então a árvore com essa raiz é apagada e aplicamos o metodo novamente
-*a essa árvore que agora tem a raiz igual a NULL
-*
-*Parametros:
-* Item - Uma estrutura do tipo Item que representa o item guardado no nó
-*
-*Valor Retornado:
-* O Método não retorna nenhum valor
-*
-*Assertivas de entrada:
-*
-*Assertivas de saída:
-* A raiz da Tree cujo método fo aplicado foi criada
-* raiz.item_ = Item
-* raiz.dad = NULL
-* raiz.sons está vazio
-*
-*Interfaces explicitas
-* Item Item_
-* Tree
-*
-*Interfaces implicitas
-*/
+
+  /** Insere-se um nó guardando um item na raiz da árvore.
+  @details
+    Se a estrutura Tree não ṕossui raiz, então aloca-se memória para um nó raiz.
+  Já se a árvore já possuir uma raiz, retira-se todos os itens da árvore para
+  inserir uma nova raiz com um novo item.
+  @param item
+    Item a ser guardado pela raiz da árvore.
+  @pre
+    A memória da árvore deve estar corretamente alocada.
+  @post
+    A árvore possuirá apenas uma raiz que conterá uma cópia de \var item. O
+  iterador da árvore se encontrará na raiz.
+  */
   void insertRoot(const Item& item);
-/**
-*Metodo insertSonNode()
-*
-*Descrição:
-* A partir do iterador da Tree que estará apontando para um nó dela iremos criar um nó novo e adicionaremos ele na lista dos filhos
-*do nó apontado pelo iterador.
-* Ao criarmos esse novo nó, iremos fazer com que o item desse nó seja o item passado como parametro, o pai desse nó seja o nó
-* apontado pelo iterador e o vetor de filhos desse nó seja inicializado mas esteja vazio
-* Caso a árvore esteja vazia e o iterador aponta para NULL, criamos uma raiz.
-*
-*Parametros:
-* Item - Uma estrutura do tipo Item que representa o item guardado no nó
-*
-*Valor Retornado:
-* O Método não retorna nenhum valor
-*
-*Assertivas de entrada:
-*
-*Assertivas de saída:
-* O nó da Tree cujo método fo aplicado foi criado
-* node.item_ = Item
-* node.dad = Iterator
-* node.sons está vazio
-*
-*Interfaces explicitas
-* Tree
-* Item Item_
-*
-*Interfaces implicitas
-*/
+
+  /** A partir do nó em que se encontra o iterador, insere-se um novo filho
+    armazenando uma cópia de um item.
+  @details
+    Caso o iterador esteja posicionado em um nó da árvore, cria-se um novo nó
+  contendo uma cópia de \var item e posiciona-se este nó como sendo o último
+  filho do nó em que se encontra o iterador. Nos casos em que a árvore é vazia e
+  o iterador aponta para null, cria-se uma raiz com esse memso item.
+  @param item
+    Item que deverá ter uma cópia armazenada pelo novo nó.
+  @pre
+    A memoria da árvore deve estar corretamente alocada.
+  @post
+    Caso a árvore não possua nós, cria-se uma raiz para ela contendo a cópia do
+  \var item, senão, cria-se um nó filho na última posição do nó em que se
+  encontra o iterador que contenha uma cópia de \var item.
+  */
   void insertSonNode(const Item& item);
-/**
-*Metodo removeNode()
-*
-*Descrição:
-* A partir do iterador da Tree que estará apontando para um nó na árvore esse método irá desalocar a memória de toda a subárvore que
-*possui como raiz o nó passado pelo iterador e irá fazer com que esse iterador aponte para o pai da raiz da subárvore apagada
-*
-*Parametros:
-* Esse método não possui parametros
-*
-*Valor retornado:
-* Esse método não retorna nenhum valor
-*
-*Assertivas de entrada:
-* O iterador da árvore deve está apontando para um nó da árvore
-*
-*Assertivas de saida:
-* Toda a subárvore que possuia o nó apontado pelo iterador foi desalocada da memória
-*
-*Interfaces explicitas:
-* Tree
-*
-*Interfaces implicitas:
-*/
+
+  /** Retira-se todos os nós contidos na sub-árvore que tem como raiz o nó em que
+    se encontra o iterador e move-se o iterador para o antigo pai do nó.
+  @details
+    Sendo o nó do iterador uma raiz de uma sub-árvore, retira-se todos os nós
+  contidos nesta e move-se o iterador para o pai da raiz da sub-árvore excluída.
+  Se a raiz da sub-árvore for também raiz da árvore, exclui-se toda a árvore e o
+  iterador apontará para null.
+  @pre
+    A memória da árvore deve esta corretamente alocada.
+  @pre
+    O iterador deve estar em algum nó existente da árvore. Sendo assim, a árvore
+  não pode estar vazia.
+  @post
+    A árvore terá a sub-árvore dada como raiz o nó em que se situa o iterador
+  excluída e o pai da sub-árvore excluida terá um filho a menos e os filhos que
+  estavam numa posição posterior em relação a sub-árvore excluída, terão suas
+  posições decrescidas de um termo. Exemplo: o filho 2 que teve o irmão 0
+  excluído, agora será o filho 1. Caso o nó em que se situava o iterador fosse
+  a raiz da árvore, a árvore fica vazia e tem seu iterador apontado para null.
+  */
   void removeNode();
+
+  /** Copia o conteúdo de uma árvore para outra.
+  @details
+    Copia os itens contidos em uma outra árvore em suas respectivas posições
+  para a árvore além de copiar a posição do iterador na árvore. Os itens
+  antigos da árvore que chama o método são excluídos.
+  @param other
+    Árvore a ser copiada.
+  @pre
+    Tanto a árvore a ser copiada quanto a árvore que chama o método, devem ter
+  memória corretamente alocada.
+  @post
+    A árvore que chama o método é uma cópia de \var other.
+  */
   Tree& operator=(const Tree& other);
+
 private:
+
   /** Estrutura que guarda os itens contidos na árvore e serve de conector entre
   os nós da árvore.
   */
@@ -379,6 +231,7 @@ private:
     Item item_;  /// Item holded by the node.
     std::vector<Node*> sons_;  /// Array of poiters to the sons of the node.
   }; // struct Node
+
   /** Estrutura que guarda informação sobre uma aresta percorrida pelo
   iterator.
   */
@@ -386,23 +239,28 @@ private:
     Node* dad_; /// Nó pai da aresta.
     int num_son_;  /// Número do filho para o qual o itearador foi.
   }; // struct Edge
+
   /** Estrutura que pode se mover pelos nós da árvore.
   */
   struct Iterator {
-    Node* node_;  /// Poiter to the current node.
-    std::stack<Edge> path_;  /// Path from the root node to the current node.
+    Node* node_;  /// Ponteiro para posição do iterador na árvore.
+    std::stack<Edge> path_;  /// Caminho percorrido pelo iterador desde a raiz
+                             /// até a posição do iterador na árvore.
   }; // struct Iterator
 private:
+
   /** Deletar todos os nós a partir do \var src e diminuir tamanho da árvore.
   @param src   Nó que será ponto de origen da limpeza da função.
   */
   void deleteNode(Node* src);
+
   /** Copiar nó com todos seus descendentes, acrescentando valor ao tamanho da
   árvore.
   @param src Raiz da subárvore a ser copirada.
   @return Ponteiro para a raiz da sub-árvore criada.
   */
   Node* copyNode(Node* src);
+
 private:
   Node* root_;  /// Raiz da árvore.
   int size_;   /// Número de itens da árvore.
