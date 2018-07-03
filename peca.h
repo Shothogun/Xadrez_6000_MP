@@ -16,30 +16,29 @@ Funções:
 #include <QDebug>
 // #include "interface.h"
 
-enum class Color { White, Black }
 
 class Piece{
 public:
+	enum Color { White, Black } color;
+
 	std::pair <int, int> position;
 	QGraphicsPixmapItem *image
+	std::list<static const std::string> lost_Pieces;
+	std::list<std::pair> positions_board;
 
 
-	Piece();
+
+	Piece(Color c) : color(c) {};
 	~Piece();
-	void piecesImages(/* Janela *cena */);
-	void mousePressEvent(QMouseEvent *event);
-	void mouseMoveEvent(QMouseEvent *event);
-	void putFigures(Piece::Color color);
-	void setColor(Color color) _color = color; 
-	void getColor() const return _color;
+	//void piecesImages(/* Janela *cena */);
+	//void mousePressEvent(QMouseEvent *event);
+	//void mouseMoveEvent(QMouseEvent *event);
+	//void putFigures(Piece::Color color);
+	void getColor() { const return Color; }
 
 signals:
 	void mouse_Pressed();
 	void mouse_Pos();
-
-private:
-	std::list<static const std::string> lostWhite;
-	std::list<static const std::string> lostBlack;	
 }
 
 class pawn: public: Piece{
@@ -59,12 +58,7 @@ class queen: public: Piece{
 }
 class king: public: Piece{
 	const int weight = 500;
-}	
-
-
-
-// É melhor a gnt usar 
-//o clássico pião 1, cavalo e bispo 3, torre 5 e dama 9
+}
 
 
 #endif // PECA_H
