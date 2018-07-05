@@ -10,55 +10,29 @@ Funções:
 #ifndef PECA_H
 #define PECA_H
 
+//#include <QDebug>
 #include <iostream>
-#include <QGraphicsPixmapItem>
-#include <QMouseEvent>
-#include <QDebug>
+#include <list>
+#include <utility>
 // #include "interface.h"
 
+enum class Color { White, Black };
+enum class Type { pawn, knight, bishop, rook, queen, king };
 
 class Piece{
 public:
-	enum Color { White, Black } color;
 
+	Color color;
+	Type type;
+	int weight;
 	std::pair <int, int> position;
-	QGraphicsPixmapItem *image
-	std::list<static const std::string> lost_Pieces;
-	std::list<std::pair> positions_board;
+	std::list<std::string> lost_Pieces;
 
-
-
-	Piece(Color c) : color(c) {};
-	~Piece();
-	//void piecesImages(/* Janela *cena */);
-	//void mousePressEvent(QMouseEvent *event);
-	//void mouseMoveEvent(QMouseEvent *event);
-	//void putFigures(Piece::Color color);
-	void getColor() { const return Color; }
-
-signals:
-	void mouse_Pressed();
-	void mouse_Pos();
-}
-
-class pawn: public: Piece{
-	const int weight = 1;
-}
-class knight: public: Piece{
-	const int weight = 3;
-}
-class bishop: public: Piece{
-	const int weight = 3;
-}
-class rook: public: Piece{
-	const int weight = 5;
-}
-class queen: public: Piece{
-	const int weight = 9;
-}
-class king: public: Piece{
-	const int weight = 500;
-}
+	// Como usar:
+	// Piece piece(Color::White, Piece::pawn, weight);
+	// Para pegar cor, exemplo: piece.getColor();
+	Piece(Color c, Type p, int weight);
+};
 
 
 #endif // PECA_H
