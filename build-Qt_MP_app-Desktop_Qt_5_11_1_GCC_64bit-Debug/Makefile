@@ -51,9 +51,13 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Qt_MP_app/main.cpp \
-		../Qt_MP_app/mainwindow.cpp moc_mainwindow.cpp
+		../Qt_MP_app/mainwindow.cpp \
+		../Qt_MP_app/chessboard.cpp qrc_imagens.cpp \
+		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		chessboard.o \
+		qrc_imagens.o \
 		moc_mainwindow.o
 DIST          = /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
@@ -223,6 +227,7 @@ DIST          = /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/linux-clang/qmake.conf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
+		../Qt_MP_app/.qmake.stash \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -242,8 +247,10 @@ DIST          = /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/exceptions.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/yacc.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/lex.prf \
-		../Qt_MP_app/Qt_MP_app.pro ../Qt_MP_app/mainwindow.hpp ../Qt_MP_app/main.cpp \
-		../Qt_MP_app/mainwindow.cpp
+		../Qt_MP_app/Qt_MP_app.pro ../Qt_MP_app/mainwindow.hpp \
+		../Qt_MP_app/chessboard.h ../Qt_MP_app/main.cpp \
+		../Qt_MP_app/mainwindow.cpp \
+		../Qt_MP_app/chessboard.cpp
 QMAKE_TARGET  = Qt_MP_app
 DESTDIR       = 
 TARGET        = Qt_MP_app
@@ -423,6 +430,7 @@ Makefile: ../Qt_MP_app/Qt_MP_app.pro /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/lin
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/linux-clang/qmake.conf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -443,6 +451,7 @@ Makefile: ../Qt_MP_app/Qt_MP_app.pro /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/lin
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/yacc.prf \
 		/home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/lex.prf \
 		../Qt_MP_app/Qt_MP_app.pro \
+		../Qt_MP_app/imagens.qrc \
 		/home/shotogun/Qt/5.11.1/gcc_64/lib/libQt5Widgets.prl \
 		/home/shotogun/Qt/5.11.1/gcc_64/lib/libQt5Gui.prl \
 		/home/shotogun/Qt/5.11.1/gcc_64/lib/libQt5Core.prl
@@ -615,6 +624,7 @@ Makefile: ../Qt_MP_app/Qt_MP_app.pro /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/lin
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf:
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/linux-clang/qmake.conf:
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf:
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -635,6 +645,7 @@ Makefile: ../Qt_MP_app/Qt_MP_app.pro /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/lin
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/yacc.prf:
 /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/lex.prf:
 ../Qt_MP_app/Qt_MP_app.pro:
+../Qt_MP_app/imagens.qrc:
 /home/shotogun/Qt/5.11.1/gcc_64/lib/libQt5Widgets.prl:
 /home/shotogun/Qt/5.11.1/gcc_64/lib/libQt5Gui.prl:
 /home/shotogun/Qt/5.11.1/gcc_64/lib/libQt5Core.prl:
@@ -652,9 +663,10 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../Qt_MP_app/imagens.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/shotogun/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Qt_MP_app/mainwindow.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Qt_MP_app/main.cpp ../Qt_MP_app/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Qt_MP_app/mainwindow.hpp ../Qt_MP_app/chessboard.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Qt_MP_app/main.cpp ../Qt_MP_app/mainwindow.cpp ../Qt_MP_app/chessboard.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Qt_MP_app/mainwindow.ui $(DISTDIR)/
 
 
@@ -679,8 +691,26 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_imagens.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_imagens.cpp
+qrc_imagens.cpp: ../Qt_MP_app/imagens.qrc \
+		/home/shotogun/Qt/5.11.1/gcc_64/bin/rcc \
+		../Qt_MP_app/chess_icons/WR.png \
+		../Qt_MP_app/chess_icons/BR.png \
+		../Qt_MP_app/chess_icons/WQ.png \
+		../Qt_MP_app/chess_icons/WH.png \
+		../Qt_MP_app/chess_icons/BQ.png \
+		../Qt_MP_app/chess_icons/WP.png \
+		../Qt_MP_app/chess_icons/board.jpg \
+		../Qt_MP_app/chess_icons/BH.png \
+		../Qt_MP_app/chess_icons/BP.png \
+		../Qt_MP_app/chess_icons/WK.png \
+		../Qt_MP_app/chess_icons/WB.png \
+		../Qt_MP_app/chess_icons/BK.png \
+		../Qt_MP_app/chess_icons/BB.png
+	/home/shotogun/Qt/5.11.1/gcc_64/bin/rcc -name imagens ../Qt_MP_app/imagens.qrc -o qrc_imagens.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -818,7 +848,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -935,7 +965,18 @@ main.o: ../Qt_MP_app/main.cpp ../Qt_MP_app/mainwindow.hpp \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qeventloop.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qguiapplication.h \
-		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsRectItem \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsView \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsview.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qpainter.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qtextoption.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qpen.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qscrollarea.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qframe.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsscene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Qt_MP_app/main.cpp
 
 mainwindow.o: ../Qt_MP_app/mainwindow.cpp ../Qt_MP_app/mainwindow.hpp \
@@ -1045,8 +1086,111 @@ mainwindow.o: ../Qt_MP_app/mainwindow.cpp ../Qt_MP_app/mainwindow.hpp \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/QVariant \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QApplication \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qeventloop.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qguiapplication.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QMenuBar \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qmenu.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qaction.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QStatusBar \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QToolBar \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qtoolbar.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Qt_MP_app/mainwindow.cpp
+
+chessboard.o: ../Qt_MP_app/chessboard.cpp ../Qt_MP_app/chessboard.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/QBrush \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qbrush.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qglobal.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qconfig.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qtcore-config.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsysinfo.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qlogging.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qflags.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qatomic.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qmutex.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qnumeric.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qversiontagging.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qtgui-config.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qpair.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qpoint.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qnamespace.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qvector.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qalgorithms.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qiterator.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qlist.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qrefcount.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qarraydata.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qstring.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qchar.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qbytearray.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qstringliteral.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qstringview.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qstringlist.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qregexp.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qcolor.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qrgb.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qrgba64.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qmatrix.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qpolygon.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qregion.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qdatastream.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qiodevice.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qobject.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qcoreevent.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qmetatype.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qobject_impl.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qline.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qtransform.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qpainterpath.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qimage.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qpixelformat.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtGui/qpixmap.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qshareddata.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qhash.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chessboard.o ../Qt_MP_app/chessboard.cpp
+
+qrc_imagens.o: qrc_imagens.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_imagens.o qrc_imagens.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
