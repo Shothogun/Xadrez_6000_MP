@@ -1,11 +1,15 @@
-#include "mainwindow.hpp"
+#include "chessboard.h"
 #include <QApplication>
+#include <QGraphicsRectItem>
+#include <QGraphicsView>
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+ChessBoard *game;
 
-    return a.exec();
+int main(int argc, char *argv[]){
+    QApplication app (argc, argv);
+
+    game = new ChessBoard();
+    game->show();
+
+    return app.exec();
 }
