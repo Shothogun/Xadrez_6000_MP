@@ -14,16 +14,17 @@ Funções:
 #include <iostream>
 #include <list>
 #include <utility>
+#include <QGraphicsPixmapItem>
 // #include "interface.h"
 
-enum class Color { White, Black };
-enum class Type { pawn, knight, bishop, rook, queen, king };
+enum class Color { White, Black } Color;
+enum class Type { pawn, knight, bishop, rook, queen, king } Type;
 
-class Piece{
+class Piece: public QGraphicsPixmapItem{
 public:
 
-	Color color;
-	Type type;
+  enum Color color;
+  enum Type type;
 	int weight;
 	std::pair <int, int> position;
 	std::list<std::string> lost_Pieces;
@@ -31,7 +32,7 @@ public:
 	// Como usar:
 	// Piece piece(Color::White, Piece::pawn, weight);
 	// Para pegar cor, exemplo: piece.getColor();
-	Piece(Color c, Type p, int weight);
+  Piece(enum Color c, enum Type p, int weight);
 };
 
 
