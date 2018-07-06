@@ -1,5 +1,18 @@
 #include "tabuleiro.h"
 
+//Vê qual é o tipo da peça
+string Board :: Type(){
+	std :: string pieceType;
+	if(pawn->type == Type::pawn) pieceType = "pawn  ";
+	else if(rook->type == Type::rook) pieceType = "rook  ";
+	else if(knight->type == Type::knight) pieceType = "knight";
+	else if(bishop->type == Type::bishop) pieceType = "bishop";
+	else if(queen->type == Type::queen) pieceType = "queen ";
+	else if(king->type == Type::king) pieceType = "king  ";
+
+	return pieceType;	
+}
+
 // Salva o jogo atual em um arquivo.pgn
 void Board :: SaveGame(){
 	std :: cout << "Deseja salvar o jogo? <Sim> <Nao>" << std :: endl;
@@ -29,12 +42,14 @@ void Board :: SaveGame(){
   		Save << "Horário: " << hour << ":" << min << ":" << sec << std :: endl;
 		Save << "Data: "    << day  << "/" << mounth << "/" << year << std :: endl;
 
-		
-		for ( k = white_pieces.begin(); k != white_pieces.end(); k++ )
-			Save << *k << std :: endl;
 
-		for ( k = black_pieces.begin(); k != black_pieces.end(); k++ )
-			Save << *k << std :: endl;
+		for ( k = white_pieces.begin(); k != white_pieces.end(); k++ ){
+			Save << "White" << "|" << Type() << "|" << k->position << std :: endl;
+		}
+
+		for ( k = black_pieces.begin(); k != black_pieces.end(); k++ ){
+			Save << "Black"<< "|" << Type() << "|" << k->position << std :: endl;
+		}
 
 		Save.close();
 
@@ -45,4 +60,3 @@ void Board :: SaveGame(){
 		std :: cout << "Digite opção valida!" << std :: endl;
 
 }
-

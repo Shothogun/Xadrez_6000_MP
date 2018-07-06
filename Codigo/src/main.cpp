@@ -3,7 +3,8 @@
 
 int main (){
 
-	SaveGame();
+	Board tab;
+	tab.SaveGame();
 
 	return 0;
 }
