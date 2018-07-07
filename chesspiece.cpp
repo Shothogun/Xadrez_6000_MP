@@ -175,23 +175,22 @@ void Piece::promotion(QPointF point){
     setPixmap(QPixmap(image));
 }
 
-bool Piece::checkPawnMove(int fromr, int fromc, int tor, int toc, bool first){
+bool Piece::checkPawnMove(int fromr, int fromc, int tor, int toc, bool first, bool diagonal){
     bool ok = true;
-    if(first && tor - fromr > 80 && tor - fromr < 0) ok = false;
-    if(!first && tor - fromr > 40 && tor - fromr < 0) ok = false);
-    //if(!diagonal)
-        //if(toc - fromc != 0) ok = false;  <<<< jogadas validas
+    if(tor - fromr < 0) ok = false;
+    if(first && (!diagonal) && tor - fromr > 100) ok = false;
+    if(!first && (!diagonal) && tor - fromr > 50) ok = false);
+    if(diagonal && ( tor - fromr > 50 || toc - fromc > 50) ) ok = false;
     return ok;
 }
 
 bool Piece::checkRookMove(int fromr, int fromc, int tor, int toc){
-    bool ok = true;
-    if( (tor - fromr != 0) && (toc - fromc) != 0 ) ok = false;
-    return ok;
+    if( (tor != fromr) && (toc != fromc)) return false;
+    else return true;
 }
 
 bool Piece::checkKnightMove(int fromr, int fromc, int tor, int toc){
-    if((abs(tor - fromr) != 80 && abs(toc - fromc) != 40) || (abs(tor - fromr) != 40 && abs(toc - fromc) != 80))
+    if((abs(tor - fromr) != 100 && abs(toc - fromc) != 50) || (abs(tor - fromr) != 50 && abs(toc - fromc) != 100))
         return false;
     else return true;
 }
@@ -202,7 +201,7 @@ bool Piece::checkBishopMove(int fromr, int fromc, int tor, int toc){
 }
 
 bool Piece::checkKingMove(int fromr, int fromc, int tor, int toc){
-    if(abs(tor - fromr) > 40 || abs(toc - fromc) > 40) return false;
+    if(abs(tor - fromr) != abs(toc - fromc) ) return false;
     else return true;
 }
 
