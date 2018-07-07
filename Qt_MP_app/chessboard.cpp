@@ -26,13 +26,13 @@ ChessBoard::ChessBoard()
 
         board->addItem(white_pawn);
         white_pawn->setAcceptedMouseButtons(Qt::LeftButton);
-        white_pawn->setOffset(26 + i*50 , 330);
+        white_pawn->setOffset(25 + i*50 , 330);
 
         Piece* black_pawn = new Piece(PieceColor::Black, PieceType::pawn, 1);
 
         board->addItem(black_pawn);
         black_pawn->setAcceptedMouseButtons(Qt::LeftButton);
-        black_pawn->setOffset(26 + i*50 , 78);
+        black_pawn->setOffset(25 + i*50 , 80);
     }
 
      // Adds bishop
@@ -76,13 +76,13 @@ ChessBoard::ChessBoard()
 
         board->addItem(white_rook);
         white_rook->setAcceptedMouseButtons(Qt::LeftButton);
-        white_rook->setOffset(27 + i*350 ,380);
+        white_rook->setOffset(25 + i*350 ,380);
 
         Piece* black_rook = new Piece(PieceColor::Black, PieceType::rook, 5);
 
         board->addItem(black_rook);
         black_rook->setAcceptedMouseButtons(Qt::LeftButton);
-        black_rook->setOffset(27 + i*350 , 30);
+        black_rook->setOffset(25 + i*350 , 30);
     }
 
     // Adds queen
@@ -115,6 +115,7 @@ ChessBoard::ChessBoard()
         board->addItem(black_king);
         black_king->setAcceptedMouseButtons(Qt::LeftButton);
         black_king->setOffset(175, 30);
+
     }
 
 

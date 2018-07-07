@@ -33,7 +33,6 @@ SOURCES += \
 HEADERS += \
         mainwindow.hpp \
     chessboard.h \
-    ../peca.h \
     ../chesspiece.h
 
 FORMS += \
