@@ -704,7 +704,8 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_imagens.cpp
 qrc_imagens.cpp: ../Qt_MP_app/imagens.qrc \
 		/home/shotogun/Qt/5.11.1/gcc_64/bin/rcc \
-		../Qt_MP_app/BIO04.WAV \
+		../Qt_MP_app/BIO03.WAV \
+		../Qt_MP_app/BIO02.WAV \
 		../Qt_MP_app/chess_icons/WR.png \
 		../Qt_MP_app/chess_icons/BR.png \
 		../Qt_MP_app/chess_icons/WQ.png \
@@ -927,6 +928,7 @@ main.o: ../Qt_MP_app/main.cpp ../Qt_MP_app/chessboard.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1206,6 +1208,7 @@ chessboard.o: ../Qt_MP_app/chessboard.cpp ../Qt_MP_app/chessboard.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1350,6 +1353,7 @@ peca.o: ../peca.cpp ../peca.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/shotogun/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		/home/shotogun/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
