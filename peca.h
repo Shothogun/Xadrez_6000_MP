@@ -10,29 +10,38 @@ Funções:
 #ifndef PECA_H
 #define PECA_H
 
-//#include <QDebug>
+#include <QDebug>
 #include <iostream>
 #include <list>
 #include <utility>
+#include <QPointF>
 #include <QGraphicsPixmapItem>
-// #include "interface.h"
+#include <QGraphicsSceneMouseEvent>
+#include <QMediaPlayer>
+#include <QObject>
 
-enum class Color { White, Black } Color;
-enum class Type { pawn, knight, bishop, rook, queen, king } Type;
+enum class PieceColor { White, Black };
+enum class PieceType { pawn, knight, bishop, rook, queen, king };
 
-class Piece: public QGraphicsPixmapItem{
+class Piece: public QGraphicsPixmapItem
+{
 public:
 
-  enum Color color;
-  enum Type type;
+  PieceColor color;
+  PieceType type;
 	int weight;
 	std::pair <int, int> position;
 	std::list<std::string> lost_Pieces;
+    QPointF offset_position;
 
 	// Como usar:
 	// Piece piece(Color::White, Piece::pawn, weight);
 	// Para pegar cor, exemplo: piece.getColor();
-  Piece(enum Color c, enum Type p, int weight);
+  Piece(PieceColor c, PieceType p, int weight, QGraphicsItem* parent = 0);
+
+  void setImage(PieceColor c, PieceType type);
+  void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
+  void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 };
 
 
