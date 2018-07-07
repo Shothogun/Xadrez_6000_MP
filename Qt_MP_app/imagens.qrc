@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/chessboard">
+        <file>chess_icons/board.jpg</file>
+        <file>chess_icons/WQ.png</file>
+        <file>chess_icons/WB.png</file>
+        <file>chess_icons/WK.png</file>
+        <file>chess_icons/BQ.png</file>
+        <file>chess_icons/BK.png</file>
+        <file>chess_icons/BB.png</file>
+        <file>chess_icons/WR.png</file>
+        <file>chess_icons/BR.png</file>
+        <file>chess_icons/BP.png</file>
+        <file>chess_icons/WP.png</file>
+        <file>chess_icons/WH.png</file>
+        <file>chess_icons/BH.png</file>
+    </qresource>
+    <qresource prefix="/sound_test">
+        <file>BIO03.WAV</file>
+        <file>BIO02.WAV</file>
+    </qresource>
+</RCC>
