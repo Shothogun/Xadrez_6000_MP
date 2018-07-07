@@ -1,6 +1,8 @@
-#include "../peca.h"
+#include "../chesspiece.h"
+#include "square.h"
 #include <QPixmap>
 
+ChessSquare *square;
 
 Piece::Piece(PieceColor c, PieceType p, int weight, QGraphicsItem* parent)
 {
@@ -8,6 +10,22 @@ Piece::Piece(PieceColor c, PieceType p, int weight, QGraphicsItem* parent)
 	this->type = p;
 	this->weight = weight;
     this->setImage(c,p);
+}
+
+void Piece::promotion(QPoint point){
+    QPixmap image;
+    if(this->color == PieceColor::White && point.x() == 800){
+        this->type = PieceType::queen;
+        this->weight = 9;
+        image = QPixmap(":/chessboard/chess_icons/WQ.png");
+	}
+    if(this->color == PieceColor::Black && point.x() == 0){
+        this->type = PieceType::queen;
+        this->weight = 9;
+        image = QPixmap(":/chessboard/chess_icons/BQ.png");
+	}
+	image = image.scaled( QSize(40,40),  Qt::IgnoreAspectRatio, Qt::FastTransformation);		
+	setPixmap(QPixmap(image));
 }
 
 void Piece::setImage(PieceColor c, PieceType type)
@@ -126,8 +144,10 @@ void Piece::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
 void Piece::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
+
     QMediaPlayer* sound = new QMediaPlayer();
     sound->setMedia(QUrl("qrc:/sound_test/BIO03.WAV"));
     sound->play();
+    //ChessSquare* square = ChessSquare::getInstance();
 }
 

@@ -1,10 +1,12 @@
 #include "chessboard.h"
+#include "square.h"
 #include <QBrush>
 #include <QImage>
 #include <QVector>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QWidget>
+#include <QList>
 
 ChessBoard::ChessBoard()
 {
@@ -18,6 +20,9 @@ ChessBoard::ChessBoard()
 
     setScene(board);
 
+    // Add regions os squares
+    this->putRegionsSquares(board);
+
     // Adds pawns
     for(int i = 0; i < 8; i++)
     {
@@ -25,14 +30,12 @@ ChessBoard::ChessBoard()
 
         board->addItem(white_pawn);
         white_pawn->setAcceptedMouseButtons(Qt::LeftButton);
-
         white_pawn->setOffset(26 + i*50 , 330);
 
         Piece* black_pawn = new Piece(PieceColor::Black, PieceType::pawn, 1);
 
         board->addItem(black_pawn);
         black_pawn->setAcceptedMouseButtons(Qt::LeftButton);
-
         black_pawn->setOffset(26 + i*50 , 78);
     }
 
@@ -43,14 +46,12 @@ ChessBoard::ChessBoard()
 
          board->addItem(white_bishop);
          white_bishop->setAcceptedMouseButtons(Qt::LeftButton);
-
          white_bishop->setOffset(125 + i*150 ,380);
 
          Piece* black_bishop = new Piece(PieceColor::Black, PieceType::bishop, 3);
 
          board->addItem(black_bishop);
          black_bishop->setAcceptedMouseButtons(Qt::LeftButton);
-
          black_bishop->setOffset(125 + i*150 , 30);
      }
 
@@ -62,14 +63,12 @@ ChessBoard::ChessBoard()
 
         board->addItem(white_knight);
         white_knight->setAcceptedMouseButtons(Qt::LeftButton);
-
         white_knight->setOffset(75 + i*250 ,380);
 
         Piece* black_knight = new Piece(PieceColor::Black, PieceType::knight, 3);
 
         board->addItem(black_knight);
         black_knight->setAcceptedMouseButtons(Qt::LeftButton);
-
         black_knight->setOffset(75 + i*250 , 30);
     }
 
@@ -81,14 +80,12 @@ ChessBoard::ChessBoard()
 
         board->addItem(white_rook);
         white_rook->setAcceptedMouseButtons(Qt::LeftButton);
-
         white_rook->setOffset(27 + i*350 ,380);
 
         Piece* black_rook = new Piece(PieceColor::Black, PieceType::rook, 5);
 
         board->addItem(black_rook);
         black_rook->setAcceptedMouseButtons(Qt::LeftButton);
-
         black_rook->setOffset(27 + i*350 , 30);
     }
 
@@ -99,14 +96,12 @@ ChessBoard::ChessBoard()
 
         board->addItem(white_queen);
         white_queen->setAcceptedMouseButtons(Qt::LeftButton);
-
         white_queen->setOffset(175 ,380);
 
         Piece* black_queen = new Piece(PieceColor::Black, PieceType::queen, 9);
 
         board->addItem(black_queen);
         black_queen->setAcceptedMouseButtons(Qt::LeftButton);
-
         black_queen->setOffset(225, 30);
     }
 
@@ -117,17 +112,32 @@ ChessBoard::ChessBoard()
 
         board->addItem(white_king);
         white_king->setAcceptedMouseButtons(Qt::LeftButton);
-
         white_king->setOffset(225 ,380);
 
         Piece* black_king = new Piece(PieceColor::Black, PieceType::king, 200);
 
         board->addItem(black_king);
         black_king->setAcceptedMouseButtons(Qt::LeftButton);
-
         black_king->setOffset(175, 30);
     }
 
 
     setFixedSize(902, 445);
+}
+
+void ChessBoard::putRegionsSquares(QGraphicsScene * board){
+    int x = 0, y = 0;
+    for(int i = 0; i < 8; i += 40){
+        for(int j = 0; j < 8; j += 40){
+            ChessSquare *square = new ChessSquare();
+            square->setPos(x, y);
+            square->center = QPoint(x+20, y+20);
+            board->addItem(square);
+        }
+    }
+}
+
+void ChessBoard::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
+    Piece::mousePressEvent(event);
+    ChessSquare::mousePressEvent(event)
 }
