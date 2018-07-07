@@ -1,4 +1,4 @@
- #include "chessboard.h"
+#include "chessboard.h"
 #include <QApplication>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>

@@ -1,14 +1,5 @@
-/*Estruturas:
-- Peça branca ou preta (union ou namespace)
-- Classe peças
-    - struct posição, vetor posições anteriores, 
-
-Funções:
-- posição válida
-*/
-
-#ifndef PECA_H
-#define PECA_H
+#ifndef CHESSPIECE_H
+#define CHESSPIECE_H
 
 #include <QDebug>
 #include <iostream>
@@ -32,17 +23,20 @@ public:
 	int weight;
 	std::pair <int, int> position;
 	std::list<std::string> lost_Pieces;
+    std::vector<QPointF> centers;
 
 	// Como usar:
-	// Piece piece(Color::White, Piece::pawn, weight);
-	// Para pegar cor, exemplo: piece.getColor();
+    // Piece piece(Color::White, Piece::pawn, number);
   Piece(PieceColor c, PieceType p, int weight, QGraphicsItem* parent = 0);
 
   void setImage(PieceColor c, PieceType type);
   void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
   void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
   void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+  void promotion(QPointF point);
+  void CentersRegions();
+  int FoundCenterRegion(QPointF point);
 };
 
 
-#endif // PECA_H
+#endif // CHESSPIECE_H

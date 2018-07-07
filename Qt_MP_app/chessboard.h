@@ -1,18 +1,18 @@
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
-#include "../peca.h"
+#include "../chesspiece.h"
 #include <QGraphicsView>
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QBrush>
-
+#include <QGraphicsSceneMouseEvent>
+#include <math.h>
 
 
 class ChessBoard : public QGraphicsView
 {
 public:
     ChessBoard();
-
     QGraphicsScene * board;
 
 };
