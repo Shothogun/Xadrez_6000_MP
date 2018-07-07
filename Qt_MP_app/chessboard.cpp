@@ -1,5 +1,4 @@
 #include "chessboard.h"
-#include "square.h"
 #include <QBrush>
 #include <QImage>
 #include <QVector>
@@ -19,9 +18,6 @@ ChessBoard::ChessBoard()
     setBackgroundBrush(QBrush(image));
 
     setScene(board);
-
-    // Add regions os squares
-    this->putRegionsSquares(board);
 
     // Adds pawns
     for(int i = 0; i < 8; i++)
@@ -123,21 +119,4 @@ ChessBoard::ChessBoard()
 
 
     setFixedSize(902, 445);
-}
-
-void ChessBoard::putRegionsSquares(QGraphicsScene * board){
-    int x = 0, y = 0;
-    for(int i = 0; i < 8; i += 40){
-        for(int j = 0; j < 8; j += 40){
-            ChessSquare *square = new ChessSquare();
-            square->setPos(x, y);
-            square->center = QPoint(x+20, y+20);
-            board->addItem(square);
-        }
-    }
-}
-
-void ChessBoard::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
-    Piece::mousePressEvent(event);
-    ChessSquare::mousePressEvent(event)
 }

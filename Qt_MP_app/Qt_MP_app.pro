@@ -28,15 +28,13 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     chessboard.cpp \
-    ../chesspiece.cpp \
-    square.cpp
+    ../chesspiece.cpp
 
 HEADERS += \
         mainwindow.hpp \
     chessboard.h \
     ../peca.h \
-    ../chesspiece.h \
-    square.h
+    ../chesspiece.h
 
 FORMS += \
         mainwindow.ui

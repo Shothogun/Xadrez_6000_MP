@@ -53,14 +53,12 @@ OBJECTS_DIR   = ./
 SOURCES       = ../Qt_MP_app/main.cpp \
 		../Qt_MP_app/mainwindow.cpp \
 		../Qt_MP_app/chessboard.cpp \
-		../chesspiece.cpp \
-		../Qt_MP_app/square.cpp qrc_imagens.cpp \
+		../chesspiece.cpp qrc_imagens.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		chessboard.o \
 		chesspiece.o \
-		square.o \
 		qrc_imagens.o \
 		moc_mainwindow.o
 DIST          = /home/cliente/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
@@ -255,12 +253,10 @@ DIST          = /home/cliente/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		../Qt_MP_app/Qt_MP_app.pro ../Qt_MP_app/mainwindow.hpp \
 		../Qt_MP_app/chessboard.h \
 		../peca.h \
-		../chesspiece.h \
-		../Qt_MP_app/square.h ../Qt_MP_app/main.cpp \
+		../chesspiece.h ../Qt_MP_app/main.cpp \
 		../Qt_MP_app/mainwindow.cpp \
 		../Qt_MP_app/chessboard.cpp \
-		../chesspiece.cpp \
-		../Qt_MP_app/square.cpp
+		../chesspiece.cpp
 QMAKE_TARGET  = Qt_MP_app
 DESTDIR       = 
 TARGET        = Qt_MP_app
@@ -681,8 +677,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Qt_MP_app/imagens.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/cliente/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Qt_MP_app/mainwindow.hpp ../Qt_MP_app/chessboard.h ../peca.h ../chesspiece.h ../Qt_MP_app/square.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Qt_MP_app/main.cpp ../Qt_MP_app/mainwindow.cpp ../Qt_MP_app/chessboard.cpp ../chesspiece.cpp ../Qt_MP_app/square.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Qt_MP_app/mainwindow.hpp ../Qt_MP_app/chessboard.h ../peca.h ../chesspiece.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Qt_MP_app/main.cpp ../Qt_MP_app/mainwindow.cpp ../Qt_MP_app/chessboard.cpp ../chesspiece.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Qt_MP_app/mainwindow.ui $(DISTDIR)/
 
 
@@ -986,8 +982,6 @@ main.o: ../Qt_MP_app/main.cpp ../Qt_MP_app/chessboard.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qaudio.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QObject \
-		../Qt_MP_app/square.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsView \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsview.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qpainter.h \
@@ -1020,7 +1014,8 @@ main.o: ../Qt_MP_app/main.cpp ../Qt_MP_app/chessboard.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qeventloop.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qguiapplication.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h
+		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h \
+		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsRectItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Qt_MP_app/main.cpp
 
 mainwindow.o: ../Qt_MP_app/mainwindow.cpp ../Qt_MP_app/mainwindow.hpp \
@@ -1267,8 +1262,6 @@ chessboard.o: ../Qt_MP_app/chessboard.cpp ../Qt_MP_app/chessboard.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qaudio.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QObject \
-		../Qt_MP_app/square.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsView \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsview.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qpainter.h \
@@ -1296,7 +1289,8 @@ chessboard.o: ../Qt_MP_app/chessboard.cpp ../Qt_MP_app/chessboard.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsScene \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/QBrush \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/QImage \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QVector
+		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QVector \
+		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/QList
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chessboard.o ../Qt_MP_app/chessboard.cpp
 
 chesspiece.o: ../chesspiece.cpp ../chesspiece.h \
@@ -1416,125 +1410,6 @@ chesspiece.o: ../chesspiece.cpp ../chesspiece.h \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QObject \
 		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chesspiece.o ../chesspiece.cpp
-
-square.o: ../Qt_MP_app/square.cpp ../Qt_MP_app/square.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsRectItem \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qtguiglobal.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qglobal.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qconfig.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qtcore-config.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qsystemdetection.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qprocessordetection.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qcompilerdetection.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qtypeinfo.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qsysinfo.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qlogging.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qflags.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qatomic.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qbasicatomic.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qgenericatomic.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qatomic_msvc.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qglobalstatic.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qmutex.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qnumeric.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qversiontagging.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qtgui-config.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qobject.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qnamespace.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qstring.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qchar.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qbytearray.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qrefcount.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qarraydata.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qstringliteral.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qstringalgorithms.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qstringview.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qlist.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qalgorithms.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qiterator.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qhashfunctions.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qpair.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qbytearraylist.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qstringlist.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qregexp.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qstringmatcher.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qcoreevent.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qscopedpointer.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qmetatype.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qvarlengtharray.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qcontainerfwd.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qobject_impl.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qvariant.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qmap.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qdebug.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qhash.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qtextstream.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qiodevice.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qlocale.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qshareddata.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qvector.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qpoint.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qset.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qpainterpath.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qmatrix.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qpolygon.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qregion.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qdatastream.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qline.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qpixmap.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qcolor.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qrgb.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qrgba64.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qimage.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qpixelformat.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtGui/qtransform.h \
-		../chesspiece.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QDebug \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QPointF \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsSceneMouseEvent \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicssceneevent.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/QMediaPlayer \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qmediaplayer.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qmediaobject.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qmultimedia.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qmediacontent.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qmediaresource.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkrequest.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtNetwork/qtnetworkglobal.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtNetwork/qtnetwork-config.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QSharedDataPointer \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QString \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QUrl \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qurl.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qurlquery.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QVariant \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/qmetaobject.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtMultimedia/qaudio.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
-		/home/cliente/Qt/5.11.1/gcc_64/include/QtCore/QObject
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o square.o ../Qt_MP_app/square.cpp
 
 qrc_imagens.o: qrc_imagens.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_imagens.o qrc_imagens.cpp
