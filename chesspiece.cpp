@@ -174,3 +174,58 @@ void Piece::promotion(QPointF point){
     image = image.scaled( QSize(40,40),  Qt::IgnoreAspectRatio, Qt::FastTransformation);
     setPixmap(QPixmap(image));
 }
+
+bool Piece::checkPawnMove(int fromr, int fromc, int tor, int toc, bool first){
+    bool ok = true;
+    if(first && tor - fromr > 80 || tor - fromr < 0) ok = false;
+    if(!first && tor - fromr > 40 || tor - fromr < 0) ok = false);
+    //if(!diagonal)
+        //if(toc - fromc != 0) ok = false;  <<<< jogadas validas
+    if(tor > 800 && tor < 0) ok = false;
+    return ok;
+}
+
+bool Piece::checkRookMove(int fromr, int fromc, int tor, int toc){
+    bool ok = true;
+    if(tor > 800 && tor < 0 && toc > 800 && toc < 0) ok = false;
+    if( (tor - fromr != 0) && (toc - fromc) != 0 ) ok = false;
+    return ok;
+}
+
+bool Piece::checkKnightMove(int fromr, int fromc, int tor, int toc){
+    if(abs(tor - fromr) != 80 || abs(toc - fromc) != 40) return false;
+    else return true;
+}
+
+bool Piece::checkKnightMove(int fromr, int fromc, int tor, int toc){
+    if((abs(tor - fromr) != 80 && abs(toc - fromc) != 40) || (abs(tor - fromr) != 40 && abs(toc - fromc) != 80))
+        return false;
+    else return true;
+}
+
+bool Piece::checkBishopMove(int fromr, int fromc, int tor, int toc){
+    if(tor == fromr || toc == fromc) return false;
+    else return true;
+}
+
+bool Piece::checkKingMove(int fromr, int fromc, int tor, int toc){
+    if(abs(tor - fromr) > 40 || abs(toc - fromc) > 40) return false;
+    else return true;
+}
+
+bool Piece::checkMove(int fromr, int fromc, int tor, int toc){
+    if(tor > 800 && tor < 0 && toc > 800 && toc < 0) ok = false
+        return false;
+    else{
+        if(this->type == PieceType::pawn) 
+            return checkPawnMove(int fromr, int fromc, int tor, int toc);
+        if(this->type == PieceType::rook)
+            return checkRookMove(int fromr, int fromc, int tor, int toc);
+        if(this->type == PieceType::knight)
+            return checkKnightMove(int fromr, int fromc, int tor, int toc);
+        if(this->type == PieceType::bishop)
+            return checkBishopMove(int fromr, int fromc, int tor, int toc);
+        if(this->type == PieceType::king)
+            return checkKingMove(int fromr, int fromc, int tor, int toc);
+    }
+}

@@ -21,9 +21,10 @@ public:
   PieceColor color;
   PieceType type;
 	int weight;
-	std::pair <int, int> position;
+	QPointF position;
 	std::list<std::string> lost_Pieces;
-    std::vector<QPointF> centers;
+  std::vector<QPointF> centers;
+  bool first; // for Pawn
 
 	// Como usar:
     // Piece piece(Color::White, Piece::pawn, number);
@@ -36,6 +37,13 @@ public:
   void promotion(QPointF point);
   void CentersRegions();
   int FoundCenterRegion(QPointF point);
+  bool checkPawnMove(int fromr, int fromc, int tor, int toc);
+  bool checkRookMove(int fromr, int fromc, int tor, int toc);
+  bool checkKnightMove(int fromr, int fromc, int tor, int toc);
+  bool checkKnightMove(int fromr, int fromc, int tor, int toc);
+  bool checkBishopMove(int fromr, int fromc, int tor, int toc);
+  bool checkKingMove(int fromr, int fromc, int tor, int toc);
+  bool checkMove(int fromr, int fromc, int tor, int toc);
 };
 
 
