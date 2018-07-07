@@ -9,5 +9,12 @@
         <file>chess_icons/BB.png</file>
         <file>chess_icons/WR.png</file>
         <file>chess_icons/BR.png</file>
+        <file>chess_icons/BP.png</file>
+        <file>chess_icons/WP.png</file>
+        <file>chess_icons/WH.png</file>
+        <file>chess_icons/BH.png</file>
+    </qresource>
+    <qresource prefix="/sound_test">
+        <file>BIO04.WAV</file>
     </qresource>
 </RCC>
