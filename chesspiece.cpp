@@ -177,24 +177,17 @@ void Piece::promotion(QPointF point){
 
 bool Piece::checkPawnMove(int fromr, int fromc, int tor, int toc, bool first){
     bool ok = true;
-    if(first && tor - fromr > 80 || tor - fromr < 0) ok = false;
-    if(!first && tor - fromr > 40 || tor - fromr < 0) ok = false);
+    if(first && tor - fromr > 80 && tor - fromr < 0) ok = false;
+    if(!first && tor - fromr > 40 && tor - fromr < 0) ok = false);
     //if(!diagonal)
         //if(toc - fromc != 0) ok = false;  <<<< jogadas validas
-    if(tor > 800 && tor < 0) ok = false;
     return ok;
 }
 
 bool Piece::checkRookMove(int fromr, int fromc, int tor, int toc){
     bool ok = true;
-    if(tor > 800 && tor < 0 && toc > 800 && toc < 0) ok = false;
     if( (tor - fromr != 0) && (toc - fromc) != 0 ) ok = false;
     return ok;
-}
-
-bool Piece::checkKnightMove(int fromr, int fromc, int tor, int toc){
-    if(abs(tor - fromr) != 80 || abs(toc - fromc) != 40) return false;
-    else return true;
 }
 
 bool Piece::checkKnightMove(int fromr, int fromc, int tor, int toc){
@@ -214,11 +207,11 @@ bool Piece::checkKingMove(int fromr, int fromc, int tor, int toc){
 }
 
 bool Piece::checkMove(int fromr, int fromc, int tor, int toc){
-    if(tor > 800 && tor < 0 && toc > 800 && toc < 0) ok = false
+    if(tor > 800 || tor < 0 || toc > 800 || toc < 0) return = false
         return false;
     else{
         if(this->type == PieceType::pawn) 
-            return checkPawnMove(int fromr, int fromc, int tor, int toc);
+            return checkPawnMove(int fromr, int fromc, int tor, int toc, this->first);
         if(this->type == PieceType::rook)
             return checkRookMove(int fromr, int fromc, int tor, int toc);
         if(this->type == PieceType::knight)
