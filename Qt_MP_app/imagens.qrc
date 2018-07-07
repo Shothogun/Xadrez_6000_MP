@@ -15,6 +15,7 @@
         <file>chess_icons/BH.png</file>
     </qresource>
     <qresource prefix="/sound_test">
-        <file>BIO04.WAV</file>
+        <file>BIO03.WAV</file>
+        <file>BIO02.WAV</file>
     </qresource>
 </RCC>

@@ -108,18 +108,26 @@ void Piece::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
     if(mouseEvent->button() == Qt::LeftButton)
     {
         QMediaPlayer* sound = new QMediaPlayer();
-        sound->setMedia(QUrl("qrc:/sound_test/BIO04.WAV"));
+        sound->setMedia(QUrl("qrc:/sound_test/BIO02.WAV"));
         sound->play();
-
-        offset_position = mouseEvent->pos();
     }
 }
 
 void Piece::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
+    // Corrects mouse position while move
+    QPointF p(20,20);
+
     if(mouseEvent->buttons() & Qt::LeftButton)
       {
-        this->move(mapToParent(mouseEvent->pos() - offset_position));
-      }
+        this->setOffset(mouseEvent->pos() - p);
+    }
+}
+
+void Piece::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    QMediaPlayer* sound = new QMediaPlayer();
+    sound->setMedia(QUrl("qrc:/sound_test/BIO03.WAV"));
+    sound->play();
 }
 

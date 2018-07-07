@@ -32,7 +32,6 @@ public:
 	int weight;
 	std::pair <int, int> position;
 	std::list<std::string> lost_Pieces;
-    QPointF offset_position;
 
 	// Como usar:
 	// Piece piece(Color::White, Piece::pawn, weight);
@@ -42,6 +41,7 @@ public:
   void setImage(PieceColor c, PieceType type);
   void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
   void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
+  void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 };
 
 
