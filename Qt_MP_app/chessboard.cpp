@@ -18,6 +18,11 @@ ChessBoard::ChessBoard()
 
     this->start();
 
+    if(this->CheckMate == true)
+    {
+      gameOver();
+    }
+
     setFixedSize(902, 445);
 }
 
@@ -151,7 +156,7 @@ void ChessBoard::gameOver()
 
     board->clear();
 
-    message = "Game Over";
+    message = "Checkmate!\nGame Over";
 
     displayGameOverWindow(message);
 }

@@ -24,17 +24,53 @@ public:
     std::list<std::string> lost_Pieces;
     std::vector<QPointF> centers;
 
-	// Como usar:
-    // Piece piece(Color::White, Piece::pawn, number);
     Piece(PieceColor c, PieceType p, int weight, QGraphicsItem* parent = 0);
 
+    /**
+     * @brief setImage
+     * @param c
+     * @param type
+     *
+     * Descrição:
+     *
+     * Insere a image da peça de acordo com os parâmetros de entrada
+     */
     void setImage(PieceColor c, PieceType type);
+
+    /**
+     * @brief promotion
+     * @param point
+     *
+     * Descrição:
+     *
+     * Promove o peão quando alcança a casa oposta do tabuleiro
+     */
+    void promotion(QPointF point);
+
+    /**
+     * @brief CentersRegions
+     *
+     * Descrição:
+     *
+     * Determina os centros das casas, valores atribuídos ao vetor centers,
+     * usado na função FoundCenterRegion()
+     */
+    void CentersRegions();
+
+    /**
+     * @brief FoundCenterRegion
+     * @param point
+     * @return
+     *
+     * Descrição:
+     *
+     * Identifica a casa mais proxima ao local da peça colocada pelo usuário e
+     * o posiciona nela.
+     */
+    int FoundCenterRegion(QPointF point);
     void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
     void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-    void promotion(QPointF point);
-    void CentersRegions();
-    int FoundCenterRegion(QPointF point);
 };
 
 
