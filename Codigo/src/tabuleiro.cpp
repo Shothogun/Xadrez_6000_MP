@@ -115,10 +115,14 @@ void Board :: BeginChessboardFile(){
 
     for(int i = 0; i < numlines; i++){
 		if((DataFile[i].substr(0, 5)).compare(White) == 0){
-			white_pieces.push_back(DataFile[i]);
+			white_pieces->position = DataDefault[i].substr(13, 2);
+			white_pieces->chess_piece = DataDefault[i].substr(7, 6); //Verificar
+			white_pieces->chess_piece = DataDefault[i].substr(0, 5); //Verificar
 		}
 		else if((DataFile[i].substr(0, 5)).compare(Black) == 0){
-			black_pieces.push_back(DataFile[i]);
+			black_pieces->position = DataDefault[i].substr(13, 2);
+			black_pieces->chess_piece = DataDefault[i].substr(7, 6); //Verificar
+			black_pieces->chess_piece = DataDefault[i].substr(0, 5); //Verificar
 		}
 		
 	}
