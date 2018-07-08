@@ -15,6 +15,10 @@ public:
     ChessBoard();
     QGraphicsScene * board;
 
+    void start();
+    void drawPanel(int x, int y, int width, int height, QColor color, double opacity);
+    void gameOver();
+    void displayGameOverWindow(QString textToDisplay);
 };
 
 
