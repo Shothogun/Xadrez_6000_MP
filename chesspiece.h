@@ -28,7 +28,7 @@ public:
 	QPointF position; //!< Posição atual da peça
   std::vector<QPointF> centers; //!< Vetor que guarda os centros das regiões
   bool first; // Variável para o peão, representa se é a primeira jogada ou não
-  bool diagonal //!< Variável para o peão, representa se pode se movimentar à diagonal
+  bool diagonal; //!< Variável para o peão, representa se pode se movimentar à diagonal
 
     Piece(PieceColor c, PieceType p, int weight);
 
