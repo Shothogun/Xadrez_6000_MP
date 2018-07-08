@@ -2,6 +2,7 @@
 
 #include "../framework/catch.h"
 #include "board.h"
+#include "game.h"
 
 namespace chess {
 
@@ -87,6 +88,17 @@ TEST_CASE ( "Board Basics", "Board operators and strcuture are working right" ) 
 
 	}
 
-}
+	SECTION ("Rewriting Position")
+	{
+		Board test_board;
+		std::string position = "c6";
+		std::tuple <int, int> position_;
+
+		position_ = test_board.PositionChess2Tuple(position);
+
+		REQUIRE (position_ == (9, 9));
+	}
 
 }
+
+} // namespace chess
