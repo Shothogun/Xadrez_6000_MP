@@ -10,8 +10,24 @@
 ChessBoard::ChessBoard()
 {
     // Create scene
-    QGraphicsScene *board = new QGraphicsScene(this);
+    this->board = new QGraphicsScene(this);
     board->setSceneRect(0,0,902,445);
+
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    this->start();
+
+    if(this->CheckMate == true)
+    {
+      gameOver();
+    }
+
+    setFixedSize(902, 445);
+}
+
+void ChessBoard::start()
+{
 
     QImage image(":chessboard/chess_icons/board.jpg");
     image = image.scaled( QSize(902,445),  Qt::IgnoreAspectRatio, Qt::FastTransformation);
@@ -118,6 +134,44 @@ ChessBoard::ChessBoard()
 
     }
 
-
-    setFixedSize(902, 445);
 }
+
+
+
+void ChessBoard::drawPanel(int x, int y, int width, int height, QColor color, double opacity)
+{
+    // draws a panel at the specified location with the specified properties
+    QGraphicsRectItem* panel = new QGraphicsRectItem(x,y,width,height);
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(color);
+    panel->setBrush(brush);
+    panel->setOpacity(opacity);
+    board->addItem(panel);
+}
+
+void ChessBoard::gameOver()
+{
+    QString message;
+
+    board->clear();
+
+    message = "Checkmate!\nGame Over";
+
+    displayGameOverWindow(message);
+}
+
+void ChessBoard::displayGameOverWindow(QString textToDisplay)
+{
+    // pop up semi transparent panel
+    drawPanel(0,0,902,445,Qt::black,0.65);
+
+    // draw panel
+    drawPanel(312,100,400,300,Qt::lightGray,0.75);
+
+    // create text annoucning winner
+    QGraphicsTextItem* overText = new QGraphicsTextItem(textToDisplay);
+    overText->setPos(460,225);
+    board->addItem(overText);
+}
+

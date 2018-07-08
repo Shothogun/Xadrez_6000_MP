@@ -26,4 +26,9 @@ funções
 
 03/07						1h							1								Estudar implementações e classes Qt
 
+05/07						2h							1									Implementar interface tabuleiro 
+
+06/07					3h59min						1 								Implementar interface tabuleiro, peças e mover
+
+07/07					2h20min						1									Implementar casas do tabuleiroe promoção do peão
 
