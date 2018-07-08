@@ -1,14 +1,14 @@
 #include "tabuleiro.h"
 
 //Vê qual é o tipo da peça
-string Board :: Type(){
+std :: string Board :: Type(Piece* piece){
 	std :: string pieceType;
-	if(pawn->type == Type::pawn) pieceType = "pawn  ";
-	else if(rook->type == Type::rook) pieceType = "rook  ";
-	else if(knight->type == Type::knight) pieceType = "knight";
-	else if(bishop->type == Type::bishop) pieceType = "bishop";
-	else if(queen->type == Type::queen) pieceType = "queen ";
-	else if(king->type == Type::king) pieceType = "king  ";
+	if(piece->type == Type::pawn) pieceType = "pawn  ";
+	else if(piece->type == Type::rook) pieceType = "rook  ";
+	else if(piece->type == Type::knight) pieceType = "knight";
+	else if(piece->type == Type::bishop) pieceType = "bishop";
+	else if(piece->type == Type::queen) pieceType = "queen ";
+	else if(piece->type == Type::king) pieceType = "king  ";
 
 	return pieceType;	
 }
@@ -44,11 +44,11 @@ void Board :: SaveGame(){
 
 
 		for ( k = white_pieces.begin(); k != white_pieces.end(); k++ ){
-			Save << "White" << "|" << Type() << "|" << k->position << std :: endl;
+			Save << "White" << "|" << Type(k->chess_piece) << "|" << k->position << std :: endl;
 		}
 
 		for ( k = black_pieces.begin(); k != black_pieces.end(); k++ ){
-			Save << "Black"<< "|" << Type() << "|" << k->position << std :: endl;
+			Save << "Black"<< "|" << Type(k->chess_piece) << "|" << k->position << std :: endl;
 		}
 
 		Save.close();
@@ -58,5 +58,71 @@ void Board :: SaveGame(){
 		exit(0);
 	else
 		std :: cout << "Digite opção valida!" << std :: endl;
+
+}
+
+//Checa se foi válida a promoção dos peões quando atingem a última linha do time oposto
+/*void Board :: ChecksPromotion(){
+	int qntdPieces;
+	if(line == 7 && qntdPieces > 1 && COLOR == preta)
+	else if(line == 14 && qntdPeao > 1 && COLOR == branca)
+}*/
+
+//Inicia tabuleiro no modo padrão
+void Board :: BeginChessboardDefault(){
+	std::list <std :: string> :: iterator k , j;
+   	std :: string White = "White"; 
+    std :: string Black = "Black";
+	std :: fstream Default("../JogosSalvos/ChessboardDefault.pgn");
+	std :: string line;
+	std :: vector<std :: string> DataDefault;
+
+    while(getline(Default, line)) DataDefault.push_back(line);
+
+    for(int i = 0; i < 35; i++){
+		if((DataDefault[i].substr(0, 5)).compare(White) == 0){
+			//white_pieces.push_back(DataDefault[i]);
+			white_pieces->position = DataDefault[i].substr(13, 2);
+			white_pieces->chess_piece = DataDefault[i].substr(7, 6); //Verificar
+			white_pieces->chess_piece = DataDefault[i].substr(0, 5); //Verificar
+		}
+		else if((DataDefault[i].substr(0, 5)).compare(Black) == 0){
+			//black_pieces.push_back(DataDefault[i]);
+			black_pieces->position = DataDefault[i].substr(13, 2);
+			black_pieces->chess_piece = DataDefault[i].substr(7, 6); //Verificar
+			black_pieces->chess_piece = DataDefault[i].substr(0, 5); //Verificar
+		}	
+	}
+
+}
+
+//Inicia tabuleiro a partir de um arquivo salvo
+void Board :: BeginChessboardFile(){
+	std :: string line, name;
+	std :: vector<std :: string> DataFile;
+	std :: string White = "White";
+	std :: string Black =  "Black";
+	int numlines = 0;
+
+	std :: cout << "Digite o nome do jogo salvo que deseja iniciar: " << std :: endl;	
+	getline(std :: cin, name);
+	std :: fstream Save("../JogosSalvos/" + name + ".pgn");
+	
+    while(getline(Save, line)){
+		DataFile.push_back(line);
+		numlines++;
+	}
+
+    for(int i = 0; i < numlines; i++){
+		if((DataFile[i].substr(0, 5)).compare(White) == 0){
+			white_pieces.push_back(DataFile[i]);
+		}
+		else if((DataFile[i].substr(0, 5)).compare(Black) == 0){
+			black_pieces.push_back(DataFile[i]);
+		}
+		
+	}
+
+	UpdateWeight();
 
 }
