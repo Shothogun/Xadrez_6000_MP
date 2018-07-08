@@ -1,17 +1,3 @@
-/**
- *@file tabuleiro.h
- *@version 1.0
- *@date 30/06/2018 
- *@author Ayllah Ahmad Lopes
- *@title Funções do Tabuleiro
- *@brief Funções auxiliares para manipulação do tabuleiro
- */
-
-#ifndef TABULEIRO_H					
-#define TABULEIRO_H
-
-#include <iostream>
-#include <string>
 #include <fstream>
 #include <vector>
 #include <cstdlib>
@@ -48,9 +34,10 @@ public:
 
 	/**
  	 *@brief Função para retornar o tipo da peça
- 	 *return uma string com o tipo de peça
+ 	 *param Peça a ser comparada
+ 	 *return Uma string com o tipo de peça
  	 */
-	string Board :: Type();
+	std :: string Type(Piece* piece);
 
 	/**
  	 *@brief Função para salvar o jogo atual
@@ -80,7 +67,5 @@ public:
 private:
 
 };
-
-
 
 #endif //TABULEIRO_H
