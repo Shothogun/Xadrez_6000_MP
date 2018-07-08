@@ -200,3 +200,50 @@ void Piece::promotion(QPointF point)
         setPixmap(QPixmap(image));
     }
 }
+
+bool Piece::checkPawnMove(int fromr, int fromc, int tor, int toc, bool first, bool diagonal){
+    bool ok = true;
+    if(tor - fromr < 0) ok = false;
+    if(first && (!diagonal) && tor - fromr > 100) ok = false;
+    if(!first && (!diagonal) && tor - fromr > 50) ok = false);
+    if(diagonal && ( tor - fromr > 50 || toc - fromc > 50) ) ok = false;
+    return ok;
+}
+
+bool Piece::checkRookMove(int fromr, int fromc, int tor, int toc){
+    if( (tor != fromr) && (toc != fromc)) return false;
+    else return true;
+}
+
+bool Piece::checkKnightMove(int fromr, int fromc, int tor, int toc){
+    if((abs(tor - fromr) != 100 && abs(toc - fromc) != 50) || (abs(tor - fromr) != 50 && abs(toc - fromc) != 100))
+        return false;
+    else return true;
+}
+
+bool Piece::checkBishopMove(int fromr, int fromc, int tor, int toc){
+    if(tor == fromr || toc == fromc) return false;
+    else return true;
+}
+
+bool Piece::checkKingMove(int fromr, int fromc, int tor, int toc){
+    if(abs(tor - fromr) != abs(toc - fromc) ) return false;
+    else return true;
+}
+
+bool Piece::checkMove(int fromr, int fromc, int tor, int toc){
+    if(tor > 800 || tor < 0 || toc > 800 || toc < 0) return = false
+        return false;
+    else{
+        if(this->type == PieceType::pawn) 
+            return checkPawnMove(int fromr, int fromc, int tor, int toc, this->first);
+        if(this->type == PieceType::rook)
+            return checkRookMove(int fromr, int fromc, int tor, int toc);
+        if(this->type == PieceType::knight)
+            return checkKnightMove(int fromr, int fromc, int tor, int toc);
+        if(this->type == PieceType::bishop)
+            return checkBishopMove(int fromr, int fromc, int tor, int toc);
+        if(this->type == PieceType::king)
+            return checkKingMove(int fromr, int fromc, int tor, int toc);
+    }
+}
