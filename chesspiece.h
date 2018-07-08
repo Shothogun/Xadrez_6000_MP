@@ -12,18 +12,23 @@
 #include <QMediaPlayer>
 #include <QObject>
 
+/*! Classe enumerada com as possíveis cores das peças */
 enum class PieceColor { White, Black };
+/*! Classe enumerada com os possíveis tipos das peças */
 enum class PieceType { pawn, knight, bishop, rook, queen, king };
 
+/*! Classe da Peça */
 class Piece: public QGraphicsPixmapItem
 {
 public:
 
-    PieceColor color;
-    PieceType type;
-    int weight;
-    std::list<std::string> lost_Pieces;
-    std::vector<QPointF> centers;
+  PieceColor color; //!< Cor da peça
+  PieceType type; //!< tipo da peça
+	int weight; //!< Peso da peça
+	QPointF position; //!< Posição atual da peça
+  std::vector<QPointF> centers; //!< Vetor que guarda os centros das regiões
+  bool first; // Variável para o peão, representa se é a primeira jogada ou não
+  bool diagonal //!< Variável para o peão, representa se pode se movimentar à diagonal
 
     Piece(PieceColor c, PieceType p, int weight);
 
