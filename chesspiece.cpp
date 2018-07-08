@@ -2,7 +2,7 @@
 #include <QPixmap>
 
 
-Piece::Piece(PieceColor c, PieceType p, int weight, QGraphicsItem* parent)
+Piece::Piece(PieceColor c, PieceType p, int weight)
 {
     this->color = c;
     this->type = p;
@@ -123,6 +123,7 @@ void Piece::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
       {
         this->setOffset(mouseEvent->pos() - p);
     }
+
 }
 
 void Piece::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
@@ -130,9 +131,23 @@ void Piece::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
     QMediaPlayer* sound = new QMediaPlayer();
     sound->setMedia(QUrl("qrc:/sound_test/BIO03.WAV"));
     sound->play();
-    int idx = this->FoundCenterRegion(mouseEvent->pos());
-    this->setOffset(this->centers[idx]);
+
+    //Set inside the chessboard
+    if(mouseEvent->pos().x() < 400 && mouseEvent->pos().y() < 400)
+    {
+      int idx = this->FoundCenterRegion(mouseEvent->pos());
+
+      this->setOffset(this->centers[idx]);
+    }
+
+    // Outside doesn't set in any square
+    else
+    {
+       this->setOffset(mouseEvent->pos());
+    }
+
     this->promotion(mouseEvent->pos());
+
 }
 
 void Piece::CentersRegions()

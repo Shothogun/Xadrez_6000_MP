@@ -1,6 +1,7 @@
-#ifndef CHESSPIECE_H
+    #ifndef CHESSPIECE_H
 #define CHESSPIECE_H
 
+#include "chessboard.h"
 #include <QDebug>
 #include <iostream>
 #include <list>
@@ -24,7 +25,7 @@ public:
     std::list<std::string> lost_Pieces;
     std::vector<QPointF> centers;
 
-    Piece(PieceColor c, PieceType p, int weight, QGraphicsItem* parent = 0);
+    Piece(PieceColor c, PieceType p, int weight);
 
     /**
      * @brief setImage
@@ -68,6 +69,7 @@ public:
      * o posiciona nela.
      */
     int FoundCenterRegion(QPointF point);
+
     void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
     void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);

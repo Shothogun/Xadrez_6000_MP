@@ -16,6 +16,8 @@ public:
     QPointF position;
     QGraphicsScene * board;
     bool CheckMate = false;
+    std::vector<QPointF> centers;
+
 
     // Starts a new game
     /**
@@ -63,6 +65,7 @@ public:
      * Chama a função drawPanel e cria a mensagem de fim de jogo
      */
     void displayGameOverWindow(QString textToDisplay);
+
 };
 
 

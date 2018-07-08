@@ -174,3 +174,4 @@ void ChessBoard::displayGameOverWindow(QString textToDisplay)
     overText->setPos(460,225);
     board->addItem(overText);
 }
+
