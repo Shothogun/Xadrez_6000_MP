@@ -1,0 +1,12 @@
+Data|Horas Trabalhadas|               Tipo Tarefa		|Descrição da Tarefa Realizada
+28/6|     3 horas     |Estudar aulas e laboratórios relacionados|        Horas de pesquisa
+3/7 |     4 horas     |                Projetar                 |Decidindo como será e o que terá nas funções
+3/7 |  1hora 44min    |Estudar aulas e laboratórios relacionados|Pesquisas para a construção das funções
+3/7 |	  30 min      |		Redigir casos de teste	        |Redigir caso de teste para a função SaveGame
+3/7 |  46min 49 seg   |		   Codificar módulo             |Iniciando a construção da função SaveGame
+3/7 |	  35 min      |		Revisar casos de teste          |Revisar caso de teste para a função SaveGame
+3/7 |      2 min      |		   Realizar os testes           |Realização do caso de teste da função SaveGame
+3/7 |     32 min      |		    Codificar módulo            |Iniciando a construção da função BeginChessboardDefault
+3/7 |     33 min      |		    Codificar módulo            |Iniciando a construção da função BeginChessboardFile
+4/7 |  2 horas 20 min |		  Revisar codigo do módulo      |Checando funções projetadas anteriormente
+
