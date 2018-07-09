@@ -1,0 +1,21 @@
+As funções do jogo de xadrez presentes na interface do programa são: Começar um novo jogo, Jogar, Modo de Análise, Salvar e Recuperar Tabuleiro
+
+Na opção começar um jogo novo o usuário terá duas opções. A primeira delas é começar com um tabuleiro vazio de forma que o usuário possa editar onde cada peça irá ficar e quais pessas serão usadas. A segunda opção será utilizar o tabuleiro padrão de xadrez. Nessas duas opções é possível escolher ser tanto as brancas quanto as negras
+
+
+Na opção de jogar o jogador tem a opção de jogar contra outro jogador humano, de forma que cada um dos jogadores faz um movimento de peça de cada vez e só são considerados movimentos válidos, de forma que ao tentar executar um móvimento não válido o movimento não é feito e é necessário fazer outro movimento. Nesse modo, o jogador pode mover uma peça tanto a partir do cursor do mouse arrastando a peça para uma casa válida quanto escrevendo a movimentação da peça através de notação algébrica dos movimentos de xadrez( Ex: e4 = pião se move para a casa e4)
+
+
+Na opção de modo de análise o programa ira calcular e mostrar uma lista das n melhores jogadas ordenadas para a posição do tabuleiro presente. O número n é escolhido pelo usuário ao início do modo análise. Ao decorrer desse modo, o jogador pode jogar normalmente como no modo de jogo
+
+
+Na opção Salvar tabuleiro o usuário tem a opção de salvar a configuração atual do tabuleiro para ser usado essa posição em outro momento
+A posição do tabuleiro é salva num arquivo de formato PNG( Portable Game Notation)
+No modo de jogo só é possível ser feito movimentos validos de acordo com as regras do jogo de xadrez
+
+
+No modo de criação de posição do tabuleiro( A primeira opção descrita) só é possível colocar posições válidas de tabuleiro, como por exemplo posições em que apresentem dois reis.
+
+
+No modo de análise a melhor jogada é calculada a partir de uma árvore de possibilidades de jogadas do jogador que irá fazer a próxima jogada. A partir dessa árvore, será calculada o peso do tabuleiro para cada posição se baseando no número de peças brancas e negras nele, de forma que a soma dos valores de cada peça considerando a cor da peça( peças brancas terão valores positivos e negras terão valores negativos) resultará no peso do tabuleiro. Assim, a partir de cada posição feita é feita uma nova árvore com todas as jogadas possíveis de cada posição e assim por diante até a árvore de possíbilidades ter um tamanho predeterminado.
+Depois disso, é feito uma lista das n melhores jogadas se baseando na jogada que futuramente provoca um tabuleiro que ficará com o melhor peso para o jogador e também leva em consideração fatores como deixar o rei em xeque.
